@@ -36,34 +36,34 @@
             <input type="text" class="form-control" name="username" placeholder="Enter your username">
             <label for="username">Username</label>
           </div>
+          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.username!='undefined' )? errors.username.msg:''%></p>
       
           <div class="form-floating my-2">
             <input type="email" class="form-control" name="email" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
           </div>
-          <div>
-            <input type="password" class="form-control" name="password" placeholder="Password">
-          </div>
-          <div>
-            <input type="password" class="form-control" name="Confirm_Password" placeholder="Password">
-          </div>
-          <!-- <div class="form-floating my-2">
+          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.email!='undefined' )? errors.email.msg:''%></p>
+
+          <div class="form-floating my-2">
             <input type="password" class="form-control" name="password" placeholder="Password">
             <label for="Password">Password</label>
-          </div> -->
-          <!-- <div class="form-floating my-2">
-            <input type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm Password">
-            <label for="ConfirmPassword">Confirm Password</label>
-          </div> -->
-          // แก้ข้องบนด้วย
-      
+          </div>
+          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.password!='undefined' )? errors.password.msg:''%></p>
+
+          <div class="form-floating my-2">
+            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password">
+            <label for="confirmPassword">Confirm Password</label>
+          </div>
+          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.confirm_password!='undefined' )? errors.confirm_password.msg:''%></p>
+          
           <button class="btn btn-primary w-100 py-2" type="submit">Sign Up</button>
+          
         </form>
       </main>
 
       <div class="container">
         <footer class="text-center py-3 my-4 border-top">
-            <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 1975 Company, Inc</span>
         </footer>
       </div>
 

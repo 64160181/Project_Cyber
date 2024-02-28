@@ -19,8 +19,8 @@
 // ------------------------------
 const connection = require('./ConMysql');
 module.exports = {
-    createUser: function(user) {
-        const { username, email, password } = user;
+    createUser: function(inputData) {
+        const { username, email, password } = inputData;
         const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
     
         connection.query(query, (error, results) => {
