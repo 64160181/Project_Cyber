@@ -36,28 +36,30 @@
             <input type="text" class="form-control" name="username" placeholder="Enter your username">
             <label for="username">Username</label>
           </div>
-          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.username!='undefined' )? errors.username.msg:''%></p>
       
           <div class="form-floating my-2">
             <input type="email" class="form-control" name="email" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
           </div>
-          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.email!='undefined' )? errors.email.msg:''%></p>
 
           <div class="form-floating my-2">
             <input type="password" class="form-control" name="password" placeholder="Password">
             <label for="Password">Password</label>
           </div>
-          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.password!='undefined' )? errors.password.msg:''%></p>
 
           <div class="form-floating my-2">
             <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password">
             <label for="confirmPassword">Confirm Password</label>
           </div>
-          <p style="color: red;"><%=(typeof errors!='undefined' && typeof errors.confirm_password!='undefined' )? errors.confirm_password.msg:''%></p>
           
           <button class="btn btn-primary w-100 py-2" type="submit">Sign Up</button>
-          
+          <% if(messages.length > 0) { %>
+            <div class="alert alert-danger" role="alert">
+                <% for(var i=0; i < messages.length; i++) { %>
+                  <li><%= messages[i] %></li>
+                <% } %>
+            </div>
+          <% } %>
         </form>
       </main>
 

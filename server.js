@@ -4,6 +4,16 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const ejs = require('ejs');
+const flash = require('express-flash');
+const session = require('express-session');
+
+app.use(session({
+    secret: 'keyboard',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}));
+app.use(flash());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');

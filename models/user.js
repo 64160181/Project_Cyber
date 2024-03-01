@@ -1,28 +1,12 @@
-// const mysql = require('mysql');
-// const connection = require('./ConMysql');
-// // Function to create a user in MySQL
-// function createUser(user) {
-//   const { username, email, password } = user;
-//   const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
-
-//   connection.query(query, (error, results) => {
-//     if (error) {
-//       console.error('Error creating user:', error);
-//     } else {
-//       console.log('User created successfully');
-//     }
-//   });
-// }
-
-// module.exports = createUser;
-
-// ------------------------------
 const connection = require('./ConMysql');
+const bcypt = require('bcryptjs');
 module.exports = {
     createUser: function(inputData) {
         const { username, email, password } = inputData;
-        const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
-    
+        const salt = bcypt.genSaltSync(10);
+        const hash = bcypt.hashSync(password, salt);
+        const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${hash}')`;
+        
         connection.query(query, (error, results) => {
         if (error) {
             console.error('Error creating user:', error);
@@ -30,5 +14,40 @@ module.exports = {
             console.log('User created successfully');
         }
         });
+    },
+    validateUsername: function(inputData, callback) {
+        const { username } = inputData;
+        const query = `SELECT * FROM users WHERE username = '${username}'`;
+    
+        connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching user:', error);
+            return callback(error, null);
+        }
+    
+        if (results.length > 0) {
+            return callback(null, results[0]);
+        }
+    
+        return callback(null, null);
+        });
+    },
+    validateEmail: function(inputData, callback) {
+        const { email } = inputData;
+        const query = `SELECT * FROM users WHERE email = '${email}'`;
+    
+        connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching user:', error);
+            return callback(error, null);
+        }
+    
+        if (results.length > 0) {
+            return callback(null, results[0]);
+        }
+    
+        return callback(null, null);
+        });
     }
-    };
+
+};
