@@ -1,3 +1,4 @@
+const { message } = require('statuses');
 const usermodel = require('../models/user');
 const route = require('color-convert/route');
 
@@ -23,7 +24,7 @@ module.exports = {
 			}
 			if (result) {
 				req.flash('error', 'Username already exists');
-				return res.render('signup', { messages: req.flash('error') });
+				return res.render('signup', { messages: req.flash('error') });	
 			}
 			usermodel.validateEmail(inputData, (error, result) => {
 				if (error) {
@@ -41,8 +42,9 @@ module.exports = {
 					return res.render('signup', { messages: req.flash('error') });
 				} else {
 					usermodel.createUser(inputData);
-					req.flash('success', 'User created successfully');
-					return res.render('signup', { messages: req.flash('success') });
+					// req.flash('success', 'User created successfully');
+					// return res.render('signup', { messages: req.flash('success') });
+					   return res.render('signup', { messages: 'User created successfully' });
 				}
 			});
 		});
