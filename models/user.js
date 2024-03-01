@@ -1,5 +1,5 @@
 const connection = require('./ConMysql');
-const bcypt = require('bcryptjs');
+const bcypt = require('bcrypt');
 module.exports = {
     createUser: function(inputData) {
         const { username, email, password } = inputData;

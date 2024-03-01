@@ -26,4 +26,5 @@ app.post('/registerUser', require('./routes/signup'));
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');
+    console.log('http://localhost:3000');
 });
