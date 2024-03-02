@@ -25,5 +25,27 @@ module.exports = {
             
             return callback(null, results);
         });
+    },
+    editPost: (topic, details, post_pic, users_uid,id, callback) => {
+        const query = `UPDATE posts SET topic = '${topic}', details = '${details}', post_pic = '${post_pic}' WHERE users_uid = '${users_uid}' AND id = '${id}'`;
+        connection.query(query, (error, results) => {
+            if (error) {
+                console.error('Error editing post:', error);
+                return callback(error, null);
+            } 
+            
+            return callback(null, results);
+        });
+    },
+    deletePost: (user_uid,id, callback) => {
+        const query = `DELETE FROM posts WHERE id = '${id}' AND users_uid = '${user_uid}'`;
+        connection.query(query, (error, results) => {
+            if (error) {
+                console.error('Error deleting post:', error);
+                return callback(error, null);
+            } 
+            
+            return callback(null, results);
+        });
     }
 };

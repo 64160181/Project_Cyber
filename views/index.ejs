@@ -6,89 +6,116 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dev man cry</title>
-  <link rel='stylesheet' type='text/css' href='css/index.css' />
+  <!-- <link rel='stylesheet' type='text/css' href='css/index.css' /> -->
   <link rel="icon" type="image/x-icon" href='images/icon.png' />
-  
+  <link rel="stylesheet" href="../css/index_new.css">
+
   <!-- Fontawesome CDN Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-  <nav class="sidebar">
-    <a class="logo">Menu</a>
-
-    <div class="menu-content">
-      <ul class="menu-items">
-        <li class="item">
-          <a href="/">
-            <c class="fa-solid fa-house"></c>หน้าหลัก
-          </a>
-        </li>
-        <li class="item">
-          <a href="/post_board">
-            <c class="fa-solid fa-pen-to-square"></c>สร้างกระทู้
-          </a>
-        </li>
-
-        <li class="item">
-          <a href="/my_board">
-            <c class="fa-solid fa-clipboard-user"></c>กระทู้ของฉัน
-          </a>
-        </li>
-
-        <li class="item">
-          <a href="#">
-            <c class="fa-solid fa-ranking-star"></c>ประวัติการโพสต์
-          </a>
-        </li>
-      </ul>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class="bi bi-globe"></i>
+      <span class="logo_name">Menu</span>
     </div>
-  </nav>
-  <nav class="navbar">
-    <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    <strong style="font-size: 31px;position: static;">Board</strong>
-    <div class="search-box">
-      <form action="" class="search-form">
-        <input type="text" name="search" id="srch" placeholder="Search" class="search-input">
-        <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
-
-    <div class="user-info">
-      <i class="fa-solid fa-user"></i>
-    <% if (user) { %>
-      <a style="font-size:14px;color: aliceblue;" href="/profile"><%= user.username %></a>
-      <a style="font-size:14px;color: aliceblue;" href="/logout">ออกจากระบบ</a>
-      <% } else { %>
-        <span>Guest</span>
-        <a style="font-size:14px;color: aliceblue;" href="/login">เข้าสู่ระบบ</a>
-        <a style="font-size:14px;color: aliceblue;">/</a>
-        <a style="font-size:14px;color: aliceblue;" href="/signup">สมัครสมาชิก</a>
-        <% } %>
-    </div>
-    
-  </nav>
-  <div class="slide-bar">
-    <i class="fa-solid fa-bars" id="sidebar-open"></i>
+    <ul class="nav-links">
+      <li>
+        <a href="/" class="active">
+          <i class="bi bi-house"></i>
+          <span class="links_name"></c> หน้าหลัก</span>
+        </a>
+      </li>
+      <li>
+        <a href="/post_board" class="active">
+          <i class="bi bi-pencil-square"></i>
+          <span class="links_name"></c> สร้างกระทู้</span>
+        </a>
+      </li>
+      <li>
+        <a href="/my_board" class="active">
+          <i class="bi bi-archive"></i>
+          <span class="links_name"></c> กระทู้ของฉัน</span>
+        </a>
+      </li>
+      <li class="log_out">
+        <a href="/logout">
+          <i class='bx bx-log-out'></i>
+          <span class="links_name">Log out</span>
+        </a>
+      </li>
+    </ul>
   </div>
-  <main class="main">
-    <section class="announcements">
-      <h2>ประกาศข่าวสาร</h2>
-      <ul>
-        <li>
-          <% Posts.forEach(function(post) { %>
-            <div class="announcement-date">
-              <i class="fa fa-calendar"></i>
-              <%= post.post_create %>
+
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <!-- <span class="dashboard">Dashboard</span> -->
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search'></i>
+      </div>
+      <div class="profile-details">
+        <% if (user) { %>
+          <img src="../images/chef.png" alt="">
+          <span class="admin_name">
+            <%= user.username %>
+          </span>
+          <!-- <a href="/logout">ออกจากระบบ</a> -->
+          <% } else { %>
+            <!-- <span>Guest</span> -->
+            <a href="/login">เข้าสู่ระบบ</a>
+            &emsp;
+            <a href="/signup">สมัครสมาชิก</a>
+            <% } %>
+      </div>
+    </nav>
+
+    <div class="home-content">
+      <div class="lish-boxes">
+        <div class="recent-lish box">
+          <div class="title">กระทู้</div>
+          <br>
+          <div class="lish-details">
+            <div class="header_wrap">
             </div>
-            <h3>
-              <a href="/show_post/<%= post.id %>" style="color: white;"><%= post.topic %></a>
-            </h3>
-            <% }) %>
-        </li>
-      </ul>
-    </section>
-  </main>
+              <ul>
+                <li>
+                  <% Posts.forEach(function(post) { %>
+                    <div class="announcement-date">
+                      <i class="fa fa-calendar"></i>
+                      <%= post.post_create %>
+                    </div>
+                    <h3>
+                      <a href="/show_post/<%= post.id %>" style="color: rgb(0, 0, 0);"><%= post.topic %></a>
+                    </h3>
+                    <br>
+                    <% }) %>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+      } else
+        sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+  </script>
 </body>
 
 </html>

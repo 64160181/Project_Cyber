@@ -48,4 +48,40 @@ module.exports = {
         });
     }
     },
+    edit_post : (req, res) => {
+        console.log(req.body);
+        const inputData = {
+            topic: 'test topic',
+            details: 'test details',
+            post_pic: 'test pic',
+            users_uid: req.session.user.uid,
+            post_id: req.body.post_id,
+        };
+        postmodel.editPost(inputData.topic, inputData.details, inputData.post_pic, inputData.users_uid, inputData.post_id, (error, result) => {
+            if (error) {
+                console.error('Error editing post:', error);
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
+            res.redirect('/');
+        });
+
+    },
+    delete_post : (req, res) => {
+        console.log(req.body);
+        const inputData = {
+            users_uid: req.session.user.uid,
+            post_id: req.body.post_id,
+        };
+        postmodel.deletePost(inputData.users_uid, inputData.post_id, (error, result) => {
+            if (error) {
+                console.error('Error deleting post:', error);
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
+            res.redirect('/');
+        });
+    }
 };

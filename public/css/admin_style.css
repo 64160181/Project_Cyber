@@ -119,6 +119,8 @@ nav .sidebar-button i{
   max-width: 550px;
   width: 100%;
   margin: 0 20px;
+  border: 2px solid #000000;
+  border-radius: 5px;
 }
 nav .search-box input{
   height: 100%;

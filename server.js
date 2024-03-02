@@ -35,6 +35,8 @@ app.get('/post_board', require('./routes/board'));
 app.get('/my_board', require('./routes/board'));
 app.get('/show_post/:id', require('./routes/board'));
 app.post('/add_new_post', require('./routes/board'));
+app.post('/delete_post', require('./routes/board'));
+app.post('/edit_post', require('./routes/board'));
 
 app.get('/adminBKB', require('./routes/admin'));
 

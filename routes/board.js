@@ -8,6 +8,7 @@ const connection = require('../models/ConMysql.js');
 router.get('/post_board', postboardView.postboardView);
 router.post('/add_new_post', postboardView.newpost);
 router.get('/my_board', postboardView.myboardView);
+
 router.get('/show_post', (req, res) => {
     res.render('show_post', {
         user: req.session.user,
@@ -24,4 +25,6 @@ router.get('/show_post/:id', (req, res) => {
         }
     });
 });
+router.post('/edit_post', postboardView.edit_post,postboardView.myboardView);
+router.post('/delete_post', postboardView.delete_post,postboardView.myboardView);
 module.exports = router;
