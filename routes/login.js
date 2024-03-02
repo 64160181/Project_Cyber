@@ -4,5 +4,6 @@ const router = express.Router();
 
 // Define your routes here
 router.get('/login', LoginView.loginView);
+router.post('/loginUser', LoginView.loginStage);
 
 module.exports = router;

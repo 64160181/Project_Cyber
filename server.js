@@ -23,6 +23,7 @@ app.get('/', require('./routes/index'));
 app.get('/login', require('./routes/login'));
 app.get('/signup', require('./routes/signup'));
 app.post('/registerUser', require('./routes/signup'));
+app.post('/loginUser', require('./routes/login'));
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');

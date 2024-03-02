@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dev man cry</title>
   <link rel='stylesheet' type='text/css' href='css/index.css' />
-  <link rel="icon" type="image/x-icon" href='images/icon.png'/>
+  <link rel="icon" type="image/x-icon" href='images/icon.png' />
   <!-- Fontawesome CDN Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
@@ -52,6 +52,18 @@
         <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
       </form>
     </div>
+    <div class="user-info">
+      <i class="fa-solid fa-user"></i>
+    <% if (user) { %>
+      <span><%= user.username %></span>
+      <a href="/logout">ออกจากระบบ</a>
+      <% } else { %>
+        <span>Guest</span>
+        <% } %>
+      
+      
+
+    </div>
     <a style="font-size:14px;color: aliceblue;" href="/login">เข้าสู่ระบบ/สมัครสมาชิก</a>
   </nav>
   <div class="slide-bar">
@@ -62,39 +74,21 @@
       <h2>ประกาศข่าวสาร</h2>
       <ul>
         <li>
-          <div class="announcement-date">
-            <i class="fa fa-calendar"></i> 27 กุมภาพันธ์ 2567
-          </div>
-          <h3>หัวข้อประกาศตัวอย่าง 1</h3>
-          <p>เนื้อหาตัวอย่าง 1</p>
-        </li>
-        <li>
-          <div class="announcement-date">
-            <i class="fa fa-calendar"></i> 20 กุมภาพันธ์ 2567
-          </div>
-          <h3>หัวข้อประกาศตัวอย่าง 2</h3>
-          <p>เนื้อหาตัวอย่าง 2</p>
-        </li>
-        <li>
-          <div class="announcement-date">
-            <i class="fa fa-calendar"></i> 10 กุมภาพันธ์ 2567
-          </div>
-          <h3>หัวข้อประกาศตัวอย่าง 3</h3>
-          <p>เนื้อหาตัวอย่าง 3</p>
+          <% Posts.forEach(function(post) { %>
+            <div class="announcement-date">
+              <i class="fa fa-calendar"></i>
+              <%= post.post_create %>
+            </div>
+            <h3>
+              <%= post.topic %>
+            </h3>
+            <p>
+              <%= post.details %>
+            </p>
+            <% }) %>
         </li>
       </ul>
     </section>
-
-    <section class="board">
-      <h2>หัวข้อกระทู้</h2>
-      <ul>
-          <li>
-              <h3>หัวข้อกระทู้ตัวอย่าง 1</h3>
-              <p>เนื้อหากระทู้ตัวอย่าง 1</p>
-          </li>
-          <li>
-  </section>
-
   </main>
 </body>
 

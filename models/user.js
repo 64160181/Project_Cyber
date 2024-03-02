@@ -48,6 +48,27 @@ module.exports = {
     
         return callback(null, null);
         });
-    }
+    },
+    login: function(inputData, callback) {
+        const { username, password } = inputData;
+        const query = `SELECT * FROM users WHERE username = '${username}'`;
+    
+        connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching user:', error);
+            return callback(error, null);
+        }
+    
+        if (results.length > 0) {
+            const user = results[0];
+            const isPasswordMatch = bcypt.compareSync(password, user.password);
+            if (isPasswordMatch) {
+            return callback(null, user);
+            }
+        }
+    
+        return callback(null, null);
+        });
+    },
 
 };
