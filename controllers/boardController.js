@@ -9,7 +9,6 @@ module.exports = {
     res.render('post_board', { user: req.session.user });
   },
   newpost: (req, res) => {
-    console.log(req.body);
     const inputData = {
       topic: req.body.topic,
       details: req.body.details,
@@ -49,7 +48,6 @@ module.exports = {
     }
     },
     edit_post : (req, res) => {
-        console.log(req.body);
         const inputData = {
             topic: 'test topic',
             details: 'test details',
@@ -69,7 +67,6 @@ module.exports = {
 
     },
     delete_post : (req, res) => {
-        console.log(req.body);
         const inputData = {
             users_uid: req.session.user.uid,
             post_id: req.body.post_id,

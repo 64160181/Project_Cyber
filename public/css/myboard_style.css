@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+  .edit-button,
+  .remove-button {
+    padding: 5px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: right;
+  }
+  
+  .edit-button {
+    background-color: #008CBA;
+    color: #fff;
+  }
+  
+  .remove-button {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  .edit-button:hover,
+  .remove-button:hover {
+    background-color: #ddd;
+    color: #333;
+  }
+  
+  /* เพิ่มรูปภาพ */
+  .my-board li img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  .my-board-buttons {
+    text-align:end;
+  }
+  .edit-button,
+  .remove-button {
+    display: inline-block;
+    margin-left: 5px;
+  }
+  .remove-button {
+    margin-right: 0;
+  } 
+  /* --------------------------------------------------------------------- */
+   /* from template */
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  .sidebar{
+    position: fixed;
+    height: 100%;
+    width: 240px;
+    background: #0A2558;
+    transition: all 0.5s ease;
+  }
+  .sidebar.active{
+    width: 60px;
+  }
+  .sidebar .logo-details{
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  .sidebar .logo-details i{
+    font-size: 28px;
+    font-weight: 500;
+    color: #fff;
+    min-width: 60px;
+    text-align: center
+  }
+  .sidebar .logo-details .logo_name{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .sidebar .nav-links{
+    margin-top: 10px;
+  }
+  .sidebar .nav-links li{
+    position: relative;
+    list-style: none;
+    height: 50px;
+  }
+  .sidebar .nav-links li a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .sidebar .nav-links li a.active{
+    background: #081D45;
+  }
+  .sidebar .nav-links li a:hover{
+    background: #081D45;
+  }
+  .sidebar .nav-links li i{
+    min-width: 60px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+  }
+  .sidebar .nav-links li a .links_name{
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .sidebar .nav-links .log_out{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  .home-section{
+    position: relative;
+    background: #f5f5f5;
+    min-height: 100vh;
+    width: calc(100% - 240px);
+    left: 240px;
+    transition: all 0.5s ease;
+  }
+  .sidebar.active ~ .home-section{
+    width: calc(100% - 60px);
+    left: 60px;
+  }
+  .home-section nav{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: calc(100% - 240px);
+    left: 240px;
+    z-index: 100;
+    padding: 0 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+  }
+  .sidebar.active ~ .home-section nav{
+    left: 60px;
+    width: calc(100% - 60px);
+  }
+  .home-section nav .sidebar-button{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  nav .sidebar-button i{
+    font-size: 35px;
+    margin-right: 10px;
+  }
+  .home-section nav .search-box{
+    position: relative;
+    height: 50px;
+    max-width: 550px;
+    width: 100%;
+    margin: 0 20px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+  }
+  nav .search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    background: #F5F6FA;
+    border: 2px solid #EFEEF1;
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 0 15px;
+  }
+  nav .search-box .bx-search{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background: #2697FF;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+    transition: all 0.4 ease;
+  }
+  .home-section nav .profile-details{
+    display: flex;
+    align-items: center;
+    background: #F5F6FA;
+    border: 2px solid #EFEEF1;
+    border-radius: 6px;
+    height: 50px;
+    min-width: 190px;
+    padding: 0 15px 0 2px;
+  }
+  nav .profile-details img{
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+  nav .profile-details .admin_name{
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    margin: 0 10px;
+    white-space: nowrap;
+  }
+  nav .profile-details i{
+    font-size: 25px;
+    color: #333;
+  }
+  .home-section .home-content{
+    position: relative;
+    padding-top: 104px;
+  }
+  
+  /* left box */
+  .home-content .lish-boxes .recent-lish{
+    width: 97.5%;
+    background: #fff;
+    padding: 20px 30px;
+    margin: 0 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  .home-content .lish-boxes .lish-details{
+    align-items: right;
+  }
+  
+  .lish-details table{
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .lish-details table th , table td{
+      text-align: center;
+      padding: 8px;
+  }
+  
+  .lish-details table tr:nth-child(even){
+      background-color: #e4e3e3;
+      
+  }
+  
+  .lish-details th {
+    background: #ffffff;
+    color: #000000;
+    font-size: 17px;
+  }
+  
+  .lish-details .header_wrap {
+    padding:0% 0;
+  }
+  .lish-details .num_rows {
+    width: 50%;
+    float:left;
+  }
+  .lish-details .rows_count {
+    width: 20%;
+    float:right;
+    text-align:right;
+    color: #999;
+  }
+  
+  /* กำหนดสไตล์สำหรับ user info */
+  .lish-details img {
+    width: 50px;
+    height:50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #00000000;
+  }
+  
+  
+  .lish-boxes .box .title{
+    font-size: 24px;
+    font-weight: 500;
+  }
+  /* ตำแหน่งปุ่ม */
+  .lish-boxes table .button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* view */
+  .lish-boxes table .button .view{
+    color: #fff;
+    background: #04AA6D;
+    padding: 4px 12px;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .lish-boxes table td .button .view:hover{
+    background:  #026641;
+  }
+  
+  /* edit */
+  .lish-boxes table .button .edit{
+    color: #fff;
+    background: #008CBA;
+    padding: 4px 12px;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .lish-boxes table td .button .edit:hover{
+    background:  #004b64;
+  }
+  
+  /* delete */
+  .lish-boxes table .button .delete{
+    color: #fff;
+    background: #f44336;
+    padding: 4px 12px;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .lish-boxes table td .button .delete:hover{
+    background:  #962921;
+  }
+  
+  /* Responsive Media Query */
+  @media (max-width: 1240px) {
+    .sidebar{
+      width: 60px;
+    }
+    .sidebar.active{
+      width: 220px;
+    }
+    .home-section{
+      width: calc(100% - 60px);
+      left: 60px;
+    }
+    .sidebar.active ~ .home-section{
+      /* width: calc(100% - 220px); */
+      overflow: hidden;
+      left: 220px;
+    }
+  
+  }
+  @media (max-width: 1000px) {
+    .overview-boxes .box{
+      width: calc(100% / 2 - 15px);
+      margin-bottom: 15px;
+    }
+  }
+  @media (max-width: 700px) {
+    nav .sidebar-button .dashboard,
+    nav .profile-details .admin_name,
+    nav .profile-details i{
+      display: none;
+    }
+    .home-section nav .profile-details{
+      height: 50px;
+      min-width: 40px;
+    }
+    .home-content .lish-boxes .lish-details{
+      width: 560px;
+    }
+  }
+  @media (max-width: 550px) {
+    .overview-boxes .box{
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .sidebar.active ~ .home-section nav .profile-details{
+      display: none;
+    }
+  }
+    @media (max-width: 400px) {
+    .sidebar{
+      width: 0;
+    }
+    .sidebar.active{
+      width: 60px;
+    }
+    .home-section{
+      width: 100%;
+      left: 0;
+    }
+    .sidebar.active ~ .home-section{
+      left: 60px;
+      width: calc(100% - 60px);
+    }
+    .home-section nav{
+      width: 100%;
+      left: 0;
+    }
+    .sidebar.active ~ .home-section nav{
+      left: 60px;
+      width: calc(100% - 60px);
+    }
+  }
+  ul {
+    list-style-type: none;
+  }
+  .inline {
+    display: inline;
+  }
