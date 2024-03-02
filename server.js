@@ -30,8 +30,8 @@ app.get('/show_post/:id', require('./routes/show_post'));
 app.post('/registerUser', require('./routes/signup'));
 app.post('/loginUser', require('./routes/login'));
 app.post('/add_new_post', require('./routes/post_board'));
-// app.post('/modify/:id', require('./routes/post_board'));
-app.post('/delete/:id', require('./routes/post_board'));
+app.post('/edit/:id', require('./routes/my_board'));
+app.post('/delete/:id', require('./routes/my_board'));
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');

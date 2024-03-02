@@ -1,4 +1,5 @@
 const connection = require('../models/ConMysql');
+const Post = require('../models/post');
 module.exports = {
 	myboardView: (req, res) => {
 		if (!req.session.user) {
@@ -21,5 +22,17 @@ module.exports = {
 				}
 			});
 		}
+	},
+	deletepost:
+		(req, res) => {
+			Post.deletePost(req.params.id, (error, result) => {
+				if (error) {
+					console.error('Error deleting post:', error);
+					return res.status(500).json({
+						message: 'Internal Server Error',
+					});
+				}
+				res.redirect('/');
+			});
+		},
 	}
-}

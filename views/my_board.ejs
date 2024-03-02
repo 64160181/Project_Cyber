@@ -60,36 +60,39 @@
     <% } else { %>
       <span>Guest</span>
       <% } %>
-    
-    
-
   </div>
   <a style="font-size:14px;color: aliceblue;" href="/login">เข้าสู่ระบบ/สมัครสมาชิก</a>
 </nav>
-  <main class="main">
-    <% Posts.forEach(function(post) { %>
-      <% if (post.Users_uid === user.uid) { %>
-        <section class="my-board">
-          <h1>My Board</h1>
-          <ul>
-            <li>
-              <div class="my-board-date">
-              </div>
-              <h1><%= post.topic %></h1>
-              <p>Sample content 1</p>
-              <div class="my-board-buttons">
+<main class="main">
+  <% Posts.forEach(function(post) { %>
+    <% if (post.Users_uid === user.uid) { %>
+      <section class="my-board">
+        <h1>My Board</h1>
+        <ul>
+          <li>
+            <div class="my-board-date">
+            </div>
+            <h1><%= post.topic %></h1>
+            <p><%= post.details %></p>
+            <div class="my-board-buttons">
+              <form action="/edit/<%= post.id %>" method="post"></form>
+                <input type="hidden" name="post_id" value="<%= post.id %>">
                 <button class="edit-button">Edit</button>
+              </form>
+              <form action="/delete/<%= post.id %>" method="post">
+                <input type="hidden" name="post_id" value="<%= post.id %>">
                 <button class="remove-button">Remove</button>
-              </div>
-            </li>
-          </ul>
-        </section>
-      <% } %>
-    <% }) %>
-    </section>
-  </main>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </section>
+    <% } %>
+  <% }) %>
+  </section>
+</main>
 
-  <script src="script.js"></script> //slide bar affect
+<script src="script.js"></script> //slide bar affect
 </body>
 
 </html>
