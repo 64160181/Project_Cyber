@@ -178,7 +178,7 @@ nav .profile-details i{
 }
 
 /* left box */
-.home-content .sales-boxes .recent-sales{
+.home-content .lish-boxes .recent-lish{
   width: 97.5%;
   background: #fff;
   padding: 20px 30px;
@@ -186,59 +186,71 @@ nav .profile-details i{
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-.home-content .sales-boxes .sales-details{
+.home-content .lish-boxes .lish-details{
   display: flex;
   align-items: center;
 }
 
-.sales-details table{
+.lish-details table{
   border-collapse: collapse;
   width: 100%;
 }
 
-
-.sales-details table th , table td{
+.lish-details table th , table td{
     text-align: center;
+    padding: 8px;
 }
 
-.sales-details table tr:nth-child(even){
-    background-color: #e4e3e3
+.lish-details table tr:nth-child(even){
+    background-color: #e4e3e3;
+    
 }
 
-.sales-details th {
+.lish-details th {
   background: #333;
   color: #fff;
+  font-size: 17px;
 }
 
-.sales-details .header_wrap {
+.lish-details .header_wrap {
   padding:40px 0;
 }
-.sales-details .num_rows {
+.lish-details .num_rows {
   width: 50%;
   float:left;
 }
-.sales-details .rows_count {
+.lish-details .rows_count {
   width: 20%;
   float:right;
   text-align:right;
   color: #999;
 }
 
-.sales-boxes .box .title{
+/* กำหนดสไตล์สำหรับ user info */
+.lish-details img {
+  width: 50px;
+  height:50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid #00000000;
+}
+
+
+.lish-boxes .box .title{
   font-size: 24px;
   font-weight: 500;
-  /* margin-bottom: 10px; */
 }
-
-
-.sales-boxes table td .button {
-  width: 44%;
+/* ตำแหน่งปุ่ม */
+.lish-boxes table .button {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
-.sales-boxes table td .button a{
+
+/* view */
+.lish-boxes table .button .view{
   color: #fff;
-  background: #234d9c;
+  background: #04AA6D;
   padding: 4px 12px;
   font-size: 15px;
   font-weight: 400;
@@ -246,10 +258,39 @@ nav .profile-details i{
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.sales-boxes table td .button a:hover{
-  background:  #314e7b;
+.lish-boxes table td .button .view:hover{
+  background:  #026641;
 }
 
+/* edit */
+.lish-boxes table .button .edit{
+  color: #fff;
+  background: #008CBA;
+  padding: 4px 12px;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.lish-boxes table td .button .edit:hover{
+  background:  #004b64;
+}
+
+/* delete */
+.lish-boxes table .button .delete{
+  color: #fff;
+  background: #f44336;
+  padding: 4px 12px;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.lish-boxes table td .button .delete:hover{
+  background:  #962921;
+}
 
 /* Responsive Media Query */
 @media (max-width: 1240px) {
@@ -286,7 +327,7 @@ nav .profile-details i{
     height: 50px;
     min-width: 40px;
   }
-  .home-content .sales-boxes .sales-details{
+  .home-content .lish-boxes .lish-details{
     width: 560px;
   }
 }

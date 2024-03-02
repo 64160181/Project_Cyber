@@ -36,6 +36,8 @@ app.get('/my_board', require('./routes/board'));
 app.get('/show_post/:id', require('./routes/board'));
 app.post('/add_new_post', require('./routes/board'));
 
+app.get('/adminBKB', require('./routes/admin'));
+
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');
