@@ -5,15 +5,17 @@ const connection = require('../models/ConMysql.js');
 
 // Define your routes here
 // router.get('/', indexView.indexView);
-router.get('/', (req, res) => {
-    connection.query('SELECT * FROM Posts', (error, results) => {
+router.get('/', indexView.indexView);
+  
+router.get('/logout', (req, res) => {
+    req.session.destroy((error) => {
         if (error) {
-            console.error('Error fetching posts: ', error);
+            console.error('Error logging out: ', error);
             res.status(500).send('Internal Server Error');
         } else {
-            res.render('index', { Posts: results,user: req.session.user});
+            res.redirect('/');
         }
     });
-} );
+});
 
 module.exports = router;

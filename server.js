@@ -11,7 +11,7 @@ app.use(session({
     secret: 'keyboard',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 60*60*1000 }
 }));
 app.use(flash());
 
@@ -25,6 +25,7 @@ app.get('/login', require('./routes/login'));
 app.get('/signup', require('./routes/signup'));
 app.get('/post_board', require('./routes/post_board'));
 app.get('/my_board', require('./routes/my_board'));
+app.get('/logout', require('./routes/index'));
 app.get('/show_post/:id', require('./routes/show_post'));
 app.post('/registerUser', require('./routes/signup'));
 app.post('/loginUser', require('./routes/login'));

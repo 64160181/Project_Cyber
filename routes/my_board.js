@@ -3,6 +3,6 @@ const myboardView = require('../controllers/myboardController.js'); // Fix the c
 const router = express.Router();
 
 // Define your routes here
-router.get('/my_board', myboardView);
+router.get('/my_board', myboardView.myboardView);
 
 module.exports = router;
