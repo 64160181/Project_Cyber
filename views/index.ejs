@@ -80,11 +80,8 @@
               <%= post.post_create %>
             </div>
             <h3>
-              <%= post.topic %>
+              <a href="/show_post/<%= post.id %>"><%= post.topic %></a>
             </h3>
-            <p>
-              <%= post.details %>
-            </p>
             <% }) %>
         </li>
       </ul>

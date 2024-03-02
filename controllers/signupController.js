@@ -44,7 +44,7 @@ module.exports = {
 					usermodel.createUser(inputData);
 					// req.flash('success', 'User created successfully');
 					// return res.render('signup', { messages: req.flash('success') });
-					   return res.render('signup', { messages: 'successfully' });
+					   return res.render('login', { messages: 'successfully' });
 				}
 			});
 		});

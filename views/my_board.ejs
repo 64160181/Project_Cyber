@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebBoard_กระทู้ของฉัน</title>
+  <link rel="stylesheet" href="css/my_board.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <!-- Fontawesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+  <nav class="sidebar">
+    <a class="logo">Menu</a>
+
+    <div class="menu-content">
+      <ul class="menu-items">
+        <li class="item">
+          <a href="/">
+            <c class="fa-solid fa-house"></c>หน้าหลัก
+          </a>
+        </li>
+        <li class="item">
+          <a href="/post_board">
+            <c class="fa-solid fa-pen-to-square"></c>สร้างกระทู้
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="/my_board">
+            <c class="fa-solid fa-clipboard-user"></c>กระทู้ของฉัน
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="#">
+            <c class="fa-solid fa-ranking-star"></c>ประวัติการโพสต์
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <nav class="navbar">
+    <i class="fa-solid fa-bars" id="sidebar-close"></i>
+    <strong style="font-size: 31px;position: static;">Board</strong>
+    <div class="search-box">
+      <form action="" class="search-form">
+        <input type="text" name="search" id="srch" placeholder="Search" class="search-input">
+        <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <a style="font-size:14px;color: aliceblue;" href="#">เข้าสู่ระบบ/สมัครสมาชิก</a>
+  </nav>
+
+  <main class="main">
+    <section class="my-board">
+      <h1>กระทู้ของฉัน</h1>
+      <ul>
+        <li>
+          <div class="my-board-date">
+          </div>
+          <h1>หัวข้อประกาศตัวอย่าง 1</h1>
+          <p>เนื้อหาตัวอย่าง 1</p>
+          <div class="my-board-buttons">
+            <button class="edit-button">Edit</button>
+            <button class="remove-button">Remove</button>
+        </div>
+        </li>
+        </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script> //slide bar affect
+</body>
+
+</html>
