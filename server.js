@@ -11,7 +11,7 @@ app.use(session({
     secret: 'keyboard',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 60*60*1000 }
 }));
 app.use(flash());
 
@@ -20,10 +20,22 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', require('./routes/index'));
+app.get('/logout', require('./routes/index'));
+
 app.get('/login', require('./routes/login'));
+app.post('/loginUser', require('./routes/login'));
+
 app.get('/signup', require('./routes/signup'));
 app.post('/registerUser', require('./routes/signup'));
-app.post('/loginUser', require('./routes/login'));
+
+app.get('/profile', require('./routes/profile'));
+app.get('/editProfile', require('./routes/profile'));
+
+app.get('/post_board', require('./routes/board'));
+app.get('/my_board', require('./routes/board'));
+app.get('/show_post/:id', require('./routes/board'));
+app.post('/add_new_post', require('./routes/board'));
+
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');

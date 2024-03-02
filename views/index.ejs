@@ -52,19 +52,20 @@
         <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
       </form>
     </div>
+
     <div class="user-info">
       <i class="fa-solid fa-user"></i>
     <% if (user) { %>
-      <span><%= user.username %></span>
-      <a href="/logout">ออกจากระบบ</a>
+      <a style="font-size:14px;color: aliceblue;" href="/profile"><%= user.username %></a>
+      <a style="font-size:14px;color: aliceblue;" href="/logout">ออกจากระบบ</a>
       <% } else { %>
         <span>Guest</span>
+        <a style="font-size:14px;color: aliceblue;" href="/login">เข้าสู่ระบบ</a>
+        <a style="font-size:14px;color: aliceblue;">/</a>
+        <a style="font-size:14px;color: aliceblue;" href="/signup">สมัครสมาชิก</a>
         <% } %>
-      
-      
-
     </div>
-    <a style="font-size:14px;color: aliceblue;" href="/login">เข้าสู่ระบบ/สมัครสมาชิก</a>
+    
   </nav>
   <div class="slide-bar">
     <i class="fa-solid fa-bars" id="sidebar-open"></i>
@@ -80,11 +81,8 @@
               <%= post.post_create %>
             </div>
             <h3>
-              <%= post.topic %>
+              <a href="/show_post/<%= post.id %>" style="color: white;"><%= post.topic %></a>
             </h3>
-            <p>
-              <%= post.details %>
-            </p>
             <% }) %>
         </li>
       </ul>

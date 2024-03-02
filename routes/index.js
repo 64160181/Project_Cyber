@@ -1,19 +1,11 @@
 const express = require('express');
 const indexView = require('../controllers/indexController.js'); // Fix the casing of the file name
 const router = express.Router();
-const connection = require('../models/ConMysql.js');
 
-// Define your routes here
-// router.get('/', indexView.indexView);
-router.get('/', (req, res) => {
-    connection.query('SELECT * FROM Posts', (error, results) => {
-        if (error) {
-            console.error('Error fetching posts: ', error);
-            res.status(500).send('Internal Server Error');
-        } else {
-            res.render('index', { Posts: results,user: req.session.user});
-        }
-    });
-} );
+
+
+router.get('/', indexView.indexView);
+
+router.get('/logout', indexView.logout);
 
 module.exports = router;

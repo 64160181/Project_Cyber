@@ -1,38 +1,25 @@
-const boards = [
-  {
-    title: "หัวข้อกระทู้ตัวอย่าง 1",
-    content: "เนื้อหาตัวอย่าง 1",
-    author: "ผู้เขียน 1",
-    date: "2023-11-16",
-    views: 100,
-    replies: 10,
-  },
-  {
-    title: "หัวข้อกระทู้ตัวอย่าง 2",
-    content: "เนื้อหาตัวอย่าง 2",
-    author: "ผู้เขียน 2",
-    date: "2023-11-17",
-    views: 200,
-    replies: 20,
-  },
-  {
-    title: "หัวข้อกระทู้ตัวอย่าง 3",
-    content: "เนื้อหาตัวอย่าง 3",
-    author: "ผู้เขียน 3",
-    date: "2023-11-18",
-    views: 300,
-    replies: 30,
-  },
-];
+const sidebar = document.querySelector(".sidebar");
+const sidebarClose = document.querySelector("#sidebar-close");
+const menu = document.querySelector(".menu-content");
+const menuItems = document.querySelectorAll(".submenu-item");
+const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
 
-const categories = [
-  {
-    name: "หมวดหมู่ 1",
-  },
-  {
-    name: "หมวดหมู่ 2",
-  },
-  {
-    name: "หมวดหมู่ 3",
-  },
-];
+sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    menu.classList.add("submenu-active");
+    item.classList.add("show-submenu");
+    menuItems.forEach((item2, index2) => {
+      if (index !== index2) {
+        item2.classList.remove("show-submenu");
+      }
+    });
+  });
+});
+
+subMenuTitles.forEach((title) => {
+  title.addEventListener("click", () => {
+    menu.classList.remove("submenu-active");
+  });
+});

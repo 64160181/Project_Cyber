@@ -1,4 +1,4 @@
-const { message } = require('statuses');
+const { message, redirect } = require('statuses');
 const usermodel = require('../models/user');
 const route = require('color-convert/route');
 
@@ -44,7 +44,7 @@ module.exports = {
 					usermodel.createUser(inputData);
 					// req.flash('success', 'User created successfully');
 					// return res.render('signup', { messages: req.flash('success') });
-					   return res.render('signup', { messages: 'successfully' });
+					   res.redirect('/login');
 				}
 			});
 		});
