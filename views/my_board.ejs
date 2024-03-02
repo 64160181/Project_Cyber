@@ -65,7 +65,7 @@
 </nav>
 <main class="main">
   <% Posts.forEach(function(post) { %>
-    <% if (post.Users_uid === user.uid) { %>
+    <% if (user.isAdmin == 'Y'|| post.Users_uid === user.uid) { %>
       <section class="my-board">
         <h1>My Board</h1>
         <ul>
@@ -88,8 +88,8 @@
         </ul>
       </section>
     <% } %>
-  <% }) %>
-  </section>
+    <% }) %>
+    </section>
 </main>
 
 <script src="script.js"></script> //slide bar affect
