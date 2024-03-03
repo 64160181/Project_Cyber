@@ -43,6 +43,7 @@ app.post('/edit_post', require('./routes/board'));
 app.get('/adminBKB', require('./routes/admin'));
 
 
+
 app.listen(3000, () => {
     console.log('Server has started with port 3000');
     console.log('http://localhost:3000');
