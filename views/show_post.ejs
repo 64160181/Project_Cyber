@@ -2,83 +2,92 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Show Post</title>
-    <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../css/detail.css"> <!-- แก้ด้วย -->
-    <!-- Fontawesome CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev man cry</title>
+  <!-- <link rel='stylesheet' type='text/css' href='css/index.css' /> -->
+  <link rel="icon" type="image/x-icon" href='images/icon.png' />
+  <link rel="stylesheet" href="show_post.css">
+
+  <!-- Fontawesome CDN Link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <nav class="sidebar">
-        <a class="logo">Menu</a>
-    
-        <div class="menu-content">
-          <ul class="menu-items">
-            <li class="item">
-              <a href="/">
-                <c class="fa-solid fa-house"></c>หน้าหลัก
-              </a>
-            </li>
-            <li class="item">
-              <a href="/post_board">
-                <c class="fa-solid fa-pen-to-square"></c>สร้างกระทู้
-              </a>
-            </li>
-    
-            <li class="item">
-              <a href="/my_board">
-                <c class="fa-solid fa-clipboard-user"></c>กระทู้ของฉัน
-              </a>
-            </li>
-    
-            <li class="item">
-              <a href="#">
-                <c class="fa-solid fa-ranking-star"></c>ประวัติการโพสต์
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
-        <strong style="font-size: 31px;position: static;">Board</strong>
-        <div class="search-box">
-            <form action="" class="search-form">
-                <input type="text" name="search" id="srch" placeholder="Search" class="search-input">
-                <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-        
-        <div class="user-info">
-            <i class="fa-solid fa-user"></i>
-          <% if (user) { %>
-            <a style="font-size:14px;color: aliceblue;" href="/profile"><%= user.username %></a>
-            <a style="font-size:14px;color: aliceblue;" href="/logout">ออกจากระบบ</a>
-            <% } else { %>
-              <span>Guest</span>
-              <a style="font-size:14px;color: aliceblue;" href="/login">เข้าสู่ระบบ</a>
-              <a style="font-size:14px;color: aliceblue;">/</a>
-              <a style="font-size:14px;color: aliceblue;" href="/signup">สมัครสมาชิก</a>
-              <% } %>
-          </div>
-          
-    </nav>
-    <div class="slide-bar">
-        <i class="fa-solid fa-bars" id="sidebar-open"></i>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class="bi bi-globe"></i>
+      <span class="logo_name">Menu</span>
     </div>
-    <main class="main">
-        <section class="announcements">
-            <div class="post-container">
+    <ul class="nav-links">
+      <li>
+        <a href="#" class="active">
+          <i class="bi bi-house"></i>
+          <span class="links_name"></c> หน้าหลัก</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" >
+          <i class='bi bi-pencil-square'></i>
+          <span class="links_name">สร้างกระทู้</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bi bi-archive'></i>
+          <span class="links_name">กระทู้ของฉัน</span>
+        </a>
+      </li>
+      <li class="log_out">
+        <a href="/logout">
+          <i class='bx bx-log-out'></i>
+          <span class="links_name">Log out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Board</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search'></i>
+      </div>
+      <div class="profile-details">
+        <% if (user) { %>
+          <img src="../images/chef.png" alt="">
+          <span class="admin_name">
+            <%= user.username %>
+          </span>
+          <!-- <a href="/logout">ออกจากระบบ</a> -->
+          <% } else { %>
+            <!-- <span>Guest</span> -->
+            <a href="/login">เข้าสู่ระบบ</a>
+            &emsp;
+            <a href="/signup">สมัครสมาชิก</a>
+            <% } %>
+      </div>
+    </nav>
+
+    <div class="home-content">
+      <div class="lish-boxes">
+        <div class="recent-lish box">
+          <div class="lish-details">
+            <div class="header_wrap">
+              
+              <div class="post-container">
                 <div class="post-header">
                     <div class="user-info">
                         <img src="../images/แม้วหม่าว.jpg" alt="รูปโปรไฟล์ผู้ใช้งาน">
                         <span class="username">ชื่อผู้ใช้งาน</span>
-                        <span class="like-count">15</span>
                     </div>
                     <div class="post-date">
                         <% showPosts.forEach(function(showpost) { %>
@@ -93,17 +102,45 @@
                 </div>
                 <div class="post-footer">
                     <div class="like-dislike">
-                        <button class="like-button"><i class="fa-regular fa-thumbs-up"></i></button>
-                        <span class="like-count">15</span>
-                        <button class="dislike-button">3<i class="fa-regular fa-thumbs-down"></i></button>
+                        <button style="color: rgb(227, 242, 255); background-color: rgb(65, 153, 240); width: 5%; border-radius: 25%; border: none;" class="dislike-button"><i class="fa-regular fa-thumbs-up"></i>15</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button style="color: rgb(227, 242, 255); background-color: rgb(204, 63, 63);  width: 5%; border-radius: 25%; border: none" class="dislike-button"><i class="fa-regular fa-thumbs-down"></i>3</button>
                         <% }) %>
                     </div>
                 </div>
             </div>
-            </div>
-        </section>
-
-        <h2 style="color: aliceblue;">ความคิดเห็น</h2>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+      
+      <div class="home-content2">
+      <div class="lish-boxes">
+        <div class="recent-lish box2">
+          <div class="comment-title">แสดงความคิดเห็น</div>
+          <div class="lish-details">
+            <div class="header_wrap">
+        <section class="board">
+            <section class="comment-section">
+                <form action="/comments" method="post">
+                    <textarea name="comment" id="comment" rows="5" placeholder="เขียนความคิดเห็นของคุณ..."></textarea><br>
+                    <label for="post-image">รูปภาพ:</label><br>
+                    <input type="file" id="post-image" name="image" accept="image/png, image/jpeg">
+                    <br>
+                    <br>
+                    <span class="color">
+                      <button class="post-button" type="submit" onclick="location.href='#'">โพสต์</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button class="cancel-button" type="button" onclick="location.href='#'">ยกเลิก</button>
+                    </span>
+                </form>
+            </section>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+        <br>
+        <div class="comment-title">ความคิดเห็น</div>
         <section class="board">
             <section class="comment-section">
                 <ul class="comments">
@@ -118,18 +155,19 @@
                 </ul>
             </section>
         </section>
-        <br>
-        <h2 style="color: aliceblue;">แสดงความคิดเห็น</h2>
-        <section class="board">
-            <section class="comment-section">
-                <form action="/comments" method="post">
-                    <textarea name="comment" id="comment" rows="5" placeholder="เขียนความคิดเห็นของคุณ..."></textarea>
-                    <button type="submit">ส่ง</button>
-                </form>
-            </section>
-        </section>
 
-    </main>
+  </section>
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+      } else
+        sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+  </script>
 </body>
 
 </html>

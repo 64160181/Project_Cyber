@@ -30,6 +30,8 @@ app.post('/registerUser', require('./routes/signup'));
 
 app.get('/profile', require('./routes/profile'));
 app.get('/editProfile', require('./routes/profile'));
+app.post('/update_user', require('./routes/profile'));
+app.post('/update_password', require('./routes/profile'));
 
 app.get('/post_board', require('./routes/board'));
 app.get('/my_board', require('./routes/board'));

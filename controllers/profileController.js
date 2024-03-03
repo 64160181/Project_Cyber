@@ -1,10 +1,81 @@
-
-
+const usermodel = require('../models/user');
 module.exports = {
-    profileView : function(req, res) {
+    profileView: function (req, res) {
         res.render('profile', { title: 'Profile', user: req.session.user });
     },
-    editProfileView : function(req, res) {
-        res.render('editProfile', { title: 'Edit Profile', user: req.session.user });
+    editProfileView: function (req, res) {
+        res.render('edit_profile', { title: 'Edit Profile', user: req.session.user });
+    },
+    updateuser: function (req, res) {
+        const inputData = {
+            uid: req.body.uid,
+            display_name: req.body.display_name,
+            username: req.body.username,
+            email: req.body.email,
+        };
+        usermodel.validateUsernameUpdate(inputData, (error, result) => {
+            if (error) {
+                console.error('Error validating username:', error);
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
+            if (result) {
+                req.flash('error', 'Username already exists');
+                req.session.user = result;
+                return res.render('edit_profile', { messages: req.flash('error'), user: req.session.user});
+            }
+            usermodel.validateEmailUpdate(inputData, (error, result) => {
+                if (error) {
+                    console.error('Error validating email:', error);
+                    return res.status(500).json({
+                        message: 'Internal Server Error',
+                    });
+                }
+                if (result) {
+                    req.flash('error', 'Email already exists');
+                    req.session.user = result;
+                    return res.render('edit_profile', { messages: req.flash('error'), user: req.session.user});
+                }
+                usermodel.updateUser(inputData, (error, result) => {
+                    if (error) {
+                        console.error('Error updating user:', error);
+                        return res.status(500).json({
+                            message: 'Internal Server Error',
+                        });
+                    }
+                    if (result) {
+                        req.session.user = result;
+                        console.log(req.session.user);
+                        return res.render('profile', { messages: req.flash('error'), user: req.session.user});
+                    }
+                });
+            });
+        });
+    },
+    updatepassword: function (req, res) {
+        const inputData = {
+            uid: req.body.uid,
+            newpassword: req.body.password,
+            confirmpassword: req.body.confirm_password,
+        };
+        console.log(inputData);
+        if (inputData.newpassword !== inputData.confirmpassword) {
+            req.flash('error', 'Password does not match');
+            return res.render('edit_profile', { user: req.session.user, messages: req.flash('error') });
+        } else {
+            usermodel.updatePassword(inputData, (error, result) => {
+                if (error) {
+                    console.error('Error updating password:', error);
+                    return res.status(500).json({
+                        message: 'Internal Server Error',
+                    });
+                }
+                if (result) {
+                    console.log(req.session.user);
+                    return res.render('profile', { user: req.session.user });
+                }
+            });
+        }
     }
 };
