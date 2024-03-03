@@ -86,8 +86,10 @@
                 <title>Show Post</title>
                     <t class="section-content"><%= showpost.topic  %></t>
                     <div class="post-content">
-                        <p><%= showpost.details %></p>
+                      <p><%= showpost.details %></p>
+                      <% if (showpost.post_pic) { %>
                         <img src="../images/<%= showpost.post_pic %>" alt="รูปภาพโพสต์" width="600" height="400">
+                      <% } %>
                     </div>
                 </div>
                 <div class="post-footer">
@@ -105,18 +107,19 @@
         <h2 style="color: aliceblue;">ความคิดเห็น</h2>
         <section class="board">
             <section class="comment-section">
-                <ul class="comments">
-                    <li class="comment">
-                        <img src="../images/uni.jpg" alt="ผู้ใช้งาน">
-                        <div class="comment-content">
-                            <span class="username">ชื่อผู้ใช้งาน</span>
-                            <span class="comment-date">27 กุมภาพันธ์ 2567 (เมื่อ 12 นาทีที่แล้ว)</span>
-                            <p class="comment-text">จริงครับๆ ผมก็ว่างั้นครับพี่ชาย</p>
-                        </div>
-                    </li>
-                </ul>
+              <ul class="comments">
+                <% comments.forEach(function(comment) { %>
+                <li class="comment">
+                  <img src="../images/uni.jpg" alt="ผู้ใช้งาน">
+                  <div class="comment-content">
+                    <span class="username">ชื่อผู้ใช้งาน</span>
+                    <span class="comment-date"><%=  comment.comment_create %></span>
+                    <p class="comment-text"><%= comment.topic %></p>
+                  </div>
+                </li>
+                <% }) %>
+              </ul>
             </section>
-        </section>
         <br>
         <h2 style="color: aliceblue;">แสดงความคิดเห็น</h2>
         <section class="board">
@@ -125,6 +128,7 @@
                     <textarea name="comment" id="comment" rows="5" placeholder="เขียนความคิดเห็นของคุณ..."></textarea>
                     <button type="submit">ส่ง</button>
                 </form>
+
             </section>
         </section>
 
