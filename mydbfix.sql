@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2024 at 10:33 PM
+-- Generation Time: Mar 03, 2024 at 09:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,8 +31,8 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `topic` varchar(100) NOT NULL,
   `detail` text DEFAULT NULL,
-  `comment_pic` varchar(45) DEFAULT NULL,
-  `comment_create` datetime NOT NULL,
+  `comment_pic` varchar(255) DEFAULT NULL,
+  `comment_create` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Posts_id` int(11) NOT NULL,
   `Posts_Users_uid` int(11) NOT NULL,
   `Users_uid` int(11) NOT NULL
@@ -48,17 +48,10 @@ CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `topic` varchar(100) NOT NULL,
   `details` text DEFAULT NULL,
-  `post_pic` varchar(45) DEFAULT NULL,
+  `post_pic` varchar(255) DEFAULT NULL,
   `post_create` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Users_uid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `topic`, `details`, `post_pic`, `post_create`, `Users_uid`) VALUES
-(33, 'test topic', 'test details', 'test pic', '2024-03-02 21:24:17', 56);
 
 -- --------------------------------------------------------
 
@@ -75,14 +68,6 @@ CREATE TABLE `users` (
   `profile_picture` text NOT NULL,
   `isAdmin` enum('Y','N') NOT NULL DEFAULT 'N' COMMENT 'Y / N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`uid`, `username`, `email`, `password`, `display_name`, `profile_picture`, `isAdmin`) VALUES
-(55, 'Ras_Ze', 'asdas@asd', '$2b$10$8K9O7YUmvHvZTWIYnHXDNuZVzuR5aPpzbGuTjPNL/Fz.ZTj4Cq/6i', '', '', 'N'),
-(56, 'admin', 'kingtv2546@gmail.com', '$2b$10$dUYbQEPQkWAxyCik8KgeluFHqEOSZTLmRUTF629Id1jrfjSgtRs12', '', '', 'N');
 
 --
 -- Indexes for dumped tables
@@ -123,13 +108,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
