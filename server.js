@@ -39,8 +39,16 @@ app.get('/show_post/:id', require('./routes/board'));
 app.post('/add_new_post', require('./routes/board'));
 app.post('/delete_post', require('./routes/board'));
 app.post('/edit_post', require('./routes/board'));
+app.post('/edit_post_view', require('./routes/board'));
 
 app.get('/adminBKB', require('./routes/admin'));
+app.post('/view_user_profile', require('./routes/admin'));
+app.post('/view_edit_user', require('./routes/admin'));
+app.post('/edit_user', require('./routes/admin'));
+app.post('/edit_password', require('./routes/admin'));
+app.post('/delete_user', require('./routes/admin'));
+
+app.post('/comments', require('./routes/board'));
 
 
 app.listen(3000, () => {

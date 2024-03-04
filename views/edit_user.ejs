@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title> WebBoard </title>
+  <link rel="stylesheet" href="..\css\edit_profile_style.css">
+  <!-- CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class="bi bi-globe"></i>
+          <span class="logo_name">Menu</span>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="/">
+              <i class="bi bi-house"></i>
+              <span class="links_name"></c> หน้าหลัก</span>
+            </a>
+          </li>
+          <li>
+            <a href="/post_board">
+              <i class="bi bi-pencil-square"></i>
+              <span class="links_name"></c> สร้างกระทู้</span>
+            </a>
+          </li>
+          <li>
+            <a href="/my_board">
+              <i class="bi bi-archive"></i>
+              <span class="links_name"></c> กระทู้ของฉัน</span>
+            </a>
+            <li>
+              <a href="/profile">
+                <i class="bi bi-person-circle"></i>
+                <span class="links_name"></c> โปรไฟล์</span>
+              </a>
+          </li>
+          <% if (session && session.isAdmin == 'Y') { %>
+          <li>
+            <a href="/adminBKB" class="active">
+              <i class="bi bi-info-circle"></i>
+              <span class="links_name"></c> Dashboard</span>
+            </a>
+          </li>
+          <% } %>
+          <% if (session) { %>
+          <li class="log_out">
+            <a href="/logout">
+              <i class='bx bx-log-out'></i>
+              <span class="links_name">Log out</span>
+            </a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    
+      <section class="home-section">
+        <nav>
+          <div class="sidebar-button">
+            <i class='bx bx-menu sidebarBtn'></i>
+            <span class="dashboard">Board</span>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search...">
+            <i class='bx bx-search'></i>
+          </div>
+          <div class="profile-details">
+            <% if (session) { %>
+              <img src="../images/chef.png" alt="">
+              <span class="admin_name">
+                <%= session.username %>
+              </span>
+              <!-- <a href="/logout">ออกจากระบบ</a> -->
+              <% } else { %>
+                <!-- <span>Guest</span> -->
+                <a href="/login">เข้าสู่ระบบ</a>
+                &emsp;
+                <a href="/signup">สมัครสมาชิก</a>
+                <% } %>
+          </div>
+        </nav>
+    <section class="home-section">
+      <div class="home-content">
+        <div class="lish-boxes">
+          <div class="recent-lish box">
+            <% if (user) { %>
+              <div class="col-12 col-sm-auto mb-3">
+                <div class="mx-auto" style="width: 160px;">
+                  <img src="../images/chef.png" width="150" height="150" class="rounded-circle" alt="">
+                  <br>
+                </div>
+              </div>
+              <div class="lish-details">
+                <div class="header_wrap">
+                </div>
+                <div class="my-board-date"></div>
+                <ul>
+                  <div class="tab-content pt-3">
+                    <div class="tab-pane active">
+                      <div class="mt-2">
+                        <button class="btn btn-primary edit-profile" type="button">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-camera" viewBox="0 0 16 16">
+                            <path
+                              d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z" />
+                            <path
+                              d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                          </svg>
+                          <span>Change Photo</span>
+                        </button>
+                      </div>
+                      <br>
+                      <div class="tab-content pt-3">
+                        <div class="tab-pane active">
+                          <form class="form" method="post" action="/edit_user">
+                            <div class="row">
+                              <div class="col">
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label style="color: black;">Display Name</label>
+                                      <input class="form-control" type="text" name="display_name"
+                                        placeholder="<%= user.display_name %>" value="<%= user.display_name %>">
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label style="color: black;">Username</label>
+                                      <input class="form-control" type="text" name="username"
+                                        placeholder="<%= user.username %>" value="<%= user.username %>">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label style="color: black;">Email</label>
+                                      <input class="form-control" type="text" name="email"
+                                        placeholder="<%= user.email %>" value="<%= user.email %>">
+                                      <input type="hidden" name="uid" value="<%= user.uid %>">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <br>
+                                      <button button class="btn btn-primary edit-profile"
+                                        type="submit">Save Changes</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="tab-content pt-3">
+                      <div class="tab-pane active">
+                        <form class="form" method="post" action="/edit_password">
+                          <div class="row">
+                            <div class="col">
+                              <div class="row">
+                                <div class="col">
+                                  <div class="form-group">
+                                    <label style="color: black;">New Password</label>
+                                    <input class="form-control" type="password" name="password"
+                                      placeholder="Enter new password" required>
+                                  </div>
+                                </div>
+                                <div class="col">
+                                  <div class="form-group">
+                                    <label style="color: black;">Confirm Password</label>
+                                    <input class="form-control" type="password" name="confirm_password"
+                                      placeholder="Confirm new password" required>
+                                    <input class="form-control" type="hidden" name="uid" value="<%= user.uid %>">
+                                    <input class="form-control" type="hidden" name="username" value="<%= user.username %>">
+                                    <input class="form-control" type="hidden" name="email" value="<%= user.email %>">
+                                    <input class="form-control" type="hidden" name="display_name" value="<%= user.display_name %>">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col">
+                                  <div class="form-group">
+                                    <br>
+                                    <button button class="btn btn-primary edit-profile"
+                                      type="submit">Save Changes</button>
+                                      <% } %>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col">
+                                  <div class="form-group">
+                                    <br>
+                                      <% if(messages.length> 0 && messages.length < 2 ) { %>
+                                      <div class="alert alert-danger" role="alert">
+                                        <% for(var i=0; i < messages.length; i++) { %>
+                                          <%= messages[i] %>
+                                            <% } %>
+                                      </div>
+                                      <% } else if (messages.length > 2) { %>
+                                        <div class="alert alert-success" role="alert">
+                                          <% for(var i=0; i < 1; i++) { %>
+                                            <%= "Login successfuly" %>
+                                              <% } %>
+                                        </div>
+                                        <% } %>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </section>  
+
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".sidebarBtn");
+      sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+          sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+      }
+    </script>
+
+</body>
+
+</html>

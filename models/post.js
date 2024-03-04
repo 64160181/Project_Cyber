@@ -26,11 +26,11 @@ module.exports = {
             return callback(null, results);
         });
     },
-    editPost: (topic, details, post_pic, users_uid,id, callback) => {
-        const query = `UPDATE posts SET topic = '${topic}', details = '${details}', post_pic = '${post_pic}' WHERE users_uid = '${users_uid}' AND id = '${id}'`;
+    editPost: (topic, details, post_pic,id, callback) => {
+        const query = `UPDATE posts SET topic = '${topic}', details = '${details}', post_pic = '${post_pic}' WHERE id = '${id}'`;
         connection.query(query, (error, results) => {
             if (error) {
-                console.error('Error editing post:', error);
+                console.error('Error updating post:', error);
                 return callback(error, null);
             } 
             

@@ -32,24 +32,65 @@
       </li>
       <li>
         <a href="/post_board" class="active">
-          <i class='bi bi-pencil-square'></i>
-          <span class="links_name">สร้างกระทู้</span>
+          <i class="bi bi-pencil-square"></i>
+          <span class="links_name"></c> สร้างกระทู้</span>
         </a>
       </li>
       <li>
         <a href="/my_board">
-          <i class='bi bi-archive'></i>
-          <span class="links_name">กระทู้ของฉัน</span>
+          <i class="bi bi-archive"></i>
+          <span class="links_name"></c> กระทู้ของฉัน</span>
+        </a>
+        <li>
+          <a href="/profile">
+            <i class="bi bi-person-circle"></i>
+            <span class="links_name"></c> โปรไฟล์</span>
+          </a>
+      </li>
+      <% if (user && user.isAdmin == 'Y') { %>
+      <li>
+        <a href="/adminBKB">
+          <i class="bi bi-info-circle"></i>
+          <span class="links_name"></c> Dashboard</span>
         </a>
       </li>
+      <% } %>
+      <% if (user) { %>
       <li class="log_out">
         <a href="/logout">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
       </li>
+      <% } %>
     </ul>
   </div>
+
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Board</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search'></i>
+      </div>
+      <div class="profile-details">
+        <% if (user) { %>
+          <img src="../images/chef.png" alt="">
+          <span class="admin_name">
+            <%= user.username %>
+          </span>
+          <!-- <a href="/logout">ออกจากระบบ</a> -->
+          <% } else { %>
+            <!-- <span>Guest</span> -->
+            <a href="/login">เข้าสู่ระบบ</a>
+            &emsp;
+            <a href="/signup">สมัครสมาชิก</a>
+            <% } %>
+      </div>
+    </nav>
 
   <section class="home-section">
     <nav>
@@ -83,7 +124,7 @@
           <div class="title">สร้างกระทู้</div>
           <div class="lish-details">
             <div class="header_wrap">
-              <form action="/add_new_post" method="post">
+              <form action="/add_new_post" method="post" enctype="multipart/form-data">
                 <div class="post-form">
                   <div class="post-header">
                   <div class="post-content">
@@ -92,7 +133,7 @@
                     <textarea id="details" name="details" style="font-size: 15px;" placeholder="เนื้อหากระทู้"required></textarea>
                     <br>
                     <label for="post-image">รูปภาพ:</label>
-                    <input type="file" id="post-pic" name="post-pic" accept="image/png, image/jpeg">
+                    <input type="file"name="post_pic" accept="image/*">
                     <span>
                       <button class="post-button" type="submit">โพสต์</button>
                       <button class="cancel-button" type="submit" formmethod="get" formaction="/">ยกเลิก</button>

@@ -7,6 +7,8 @@
   <title> AdminConsole </title>
   <link rel="stylesheet" href="../css/admin_style.css">
   <!-- Boxicons CDN Link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -14,26 +16,52 @@
 <body>
   <div class="sidebar">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
-      <span class="logo_name">CodingLab</span>
+      <i class="bi bi-globe"></i>
+      <span class="logo_name">Menu</span>
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#" class="active">
-          <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Dashboard</span>
+        <a href="/">
+          <i class="bi bi-house"></i>
+          <span class="links_name"></c> หน้าหลัก</span>
         </a>
       </li>
-
+      <li>
+        <a href="/post_board">
+          <i class="bi bi-pencil-square"></i>
+          <span class="links_name"></c> สร้างกระทู้</span>
+        </a>
+      </li>
+      <li>
+        <a href="/my_board">
+          <i class="bi bi-archive"></i>
+          <span class="links_name"></c> กระทู้ของฉัน</span>
+        </a>
+        <li>
+          <a href="/profile">
+            <i class="bi bi-person-circle"></i>
+            <span class="links_name"></c> โปรไฟล์</span>
+          </a>
+      </li>
+      <% if (user && user.isAdmin == 'Y') { %>
+      <li>
+        <a href="/adminBKB" class="active">
+          <i class="bi bi-info-circle"></i>
+          <span class="links_name"></c> Dashboard</span>
+        </a>
+      </li>
+      <% } %>
+      <% if (user) { %>
       <li class="log_out">
-        <a href="#">
+        <a href="/logout">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
       </li>
+      <% } %>
     </ul>
   </div>
-  
+
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
@@ -45,9 +73,18 @@
         <i class='bx bx-search'></i>
       </div>
       <div class="profile-details">
-        <img src="../images/chef.png" alt="">
-        <span class="admin_name">Prem Shahi</span>
-        <i class='bx bx-chevron-down'></i>
+        <% if (user) { %>
+          <img src="../images/chef.png" alt="">
+          <span class="admin_name">
+            <%= user.username %>
+          </span>
+          <!-- <a href="/logout">ออกจากระบบ</a> -->
+          <% } else { %>
+            <!-- <span>Guest</span> -->
+            <a href="/login">เข้าสู่ระบบ</a>
+            &emsp;
+            <a href="/signup">สมัครสมาชิก</a>
+            <% } %>
       </div>
     </nav>
 
@@ -70,25 +107,33 @@
                 </tr>
               </thead>
               <tbody>
+                <% for (const user of users) { %>
                 <tr>
-                  <td>1</td>
+                  <td><%= user.uid %></td>
                   <td>
                     <img src="../images/chef.png" alt="ผู้ใช้งาน">
                   </td>
-                  <td>Toby</td>
-                  <td>nt@mi.co.uk</td>
-                  <td>13666</td>
+                  <td> <%= user.username %></td>
+                  <td> <%= user.email %></td>
+                  <td>****</td>
                   <td>
+                    <form method="post" action="/view_user_profile">
+                    <input type="hidden" name="uid" value="<%= user.uid %>">
+                    <input type="hidden" name="username" value="<%= user.username %>">
+                    <input type="hidden" name="email" value="<%= user.email %>" >
+                    <input type="hidden" name="display_name" value="<%= user.display_name %>" >
                     <div class="button">
-                      <a class="view" href="#">View</a>&nbsp
-                      <a class="edit" href="#">Edit</a>&nbsp
-                      <a class="delete" href="#">Delete</a>
+                      <button class="view" type="summit">View</button>&nbsp
+                      <button class="edit" type="summit" formaction="/view_edit_user">Edit</button>&nbsp
+                      <button class="delete" type="summit" formaction="/delete_user">Delete</button>
                     </div>
+                  </form>
                   </td>
                 </tr>
+                <% } %>
 
 
-                <tr>
+                <!-- <tr>
                   <td>2</td>
                   <td>
                     <img src="../images/chef.png" alt="ผู้ใช้งาน">
@@ -103,7 +148,7 @@
                       <a class="delete" href="#">Delete</a>
                     </div>
                   </td>
-                </tr>
+                </tr> -->
 
               <tbody>
             </table>
