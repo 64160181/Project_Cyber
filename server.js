@@ -6,6 +6,7 @@ const path = require('path');
 const ejs = require('ejs');
 const flash = require('express-flash');
 const session = require('express-session');
+const port = process.env.PORT || 3000;
 
 app.use(session({
     secret: 'keyboard',
@@ -51,7 +52,7 @@ app.post('/delete_user', require('./routes/admin'));
 app.post('/comments', require('./routes/board'));
 
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server has started with port 3000');
     console.log('http://localhost:3000');
 });

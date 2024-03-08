@@ -42,21 +42,4 @@ module.exports = {
     });
     }
     )}
-}
-  //   console.log(req.body);
-  //   const inputData = {
-  //     topic: req.body.topic,
-  //     details: req.body.details,
-  //     post_pic: req.file.filename, // Assuming you have a file upload middleware that saves the file and adds the filename to req.file
-  //     users_uid: req.session.user.uid,
-  //   };
-  //   postmodel.addNewPost(inputData.topic, inputData.details, inputData.post_pic, inputData.users_uid, (error, result) => {
-  //     if (error) {
-  //       console.error('Error creating post:', error);
-  //       return res.status(500).json({
-  //         message: 'Internal Server Error',
-  //       });
-  //     }
-  //     res.redirect('/');
-  //   });
-  // },
+};

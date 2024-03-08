@@ -6,7 +6,7 @@ module.exports = {
 			// Redirect to login page if user is not logged in
 			return res.redirect('/login');
 		} else {
-			connection.query('SELECT * FROM Users', (error, userResults) => {
+			connection.query('SELECT * FROM users', (error, userResults) => {
 				if (error) {
 					console.error('Error fetching users: ', error);
 					res.status(500).send('Internal Server Error');

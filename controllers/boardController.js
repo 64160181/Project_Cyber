@@ -52,12 +52,12 @@ module.exports = {
             // Redirect to login page if user is not logged in
             return res.redirect('/login');
         } else {
-            connection.query('SELECT * FROM Users', (error, userResults) => {
+            connection.query('SELECT * FROM users', (error, userResults) => {
                 if (error) {
                     console.error('Error fetching users: ', error);
                     res.status(500).send('Internal Server Error');
                 } else {
-                    connection.query('SELECT * FROM Posts', (error, postResults) => {
+                    connection.query('SELECT * FROM posts', (error, postResults) => {
                         if (error) {
                             console.error('Error fetching posts: ', error);
                             res.status(500).send('Internal Server Error');
@@ -105,7 +105,7 @@ module.exports = {
         });
     },
     edit_post_view : (req, res) => {
-        connection.query('SELECT * FROM Posts WHERE id = ?', [req.body.post_id], (error, results) => {
+        connection.query('SELECT * FROM posts WHERE id = ?', [req.body.post_id], (error, results) => {
             if (error) {
                 console.error('Error fetching posts: ', error);
                 res.status(500).send('Internal Server Error');

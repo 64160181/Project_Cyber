@@ -18,7 +18,7 @@ router.get('/show_post', (req, res) => {
 });
 
 router.get('/show_post/:id', (req, res) => {
-    connection.query('SELECT * FROM Posts WHERE id = ?', [req.params.id], (error , showpostresults) => {
+    connection.query('SELECT * FROM posts WHERE id = ?', [req.params.id], (error , showpostresults) => {
         if (error) {
             console.error('Error fetching posts: ', error);
             res.status(500).send('Internal Server Error');
@@ -29,7 +29,7 @@ router.get('/show_post/:id', (req, res) => {
                     res.status(500).send('Internal Server Error');
                 } else {
                     const uid = showpostresults[0].Users_uid;
-                    connection.query('SELECT * FROM Users WHERE uid = ?',[uid], (error, userResults) => {
+                    connection.query('SELECT * FROM users WHERE uid = ?',[uid], (error, userResults) => {
                         if (error) {
                             console.error('Error fetching users: ', error);
                             res.status(500).send('Internal Server Error');
