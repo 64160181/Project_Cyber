@@ -1,4 +1,14 @@
 const usermodel = require('../models/user');
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/images/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+var upload = multer({ storage: storage });
 module.exports = {
     profileView: function (req, res) {
         res.render('profile', { title: 'Profile', user: req.session.user });
@@ -77,5 +87,33 @@ module.exports = {
                 }
             });
         }
-    }
-};
+    },
+    updateprofilepicture: function (req, res) {
+        upload.single('profile_picture')(req, res, (err) => {
+            if (err) {
+                console.error('Error uploading file:', err);
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
+            console.log(req.body);
+            const inputData = {
+                uid: req.body.uid,
+                profile_picture: req.file ? req.file.filename : null,
+            };
+            usermodel.updateprofilepicture(inputData, (error, result) => {
+                if (error) {
+                    console.error('Error updating profile picture:', error);
+                    return res.status(500).json({
+                        message: 'Internal Server Error',
+                    });
+                }
+                if (result) {
+                    req.session.user = result;
+                    return res.render('profile', { user: req.session.user });
+                }
+            });
+        });
+    },
+
+}

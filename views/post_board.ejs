@@ -78,7 +78,7 @@
       </div>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/chef.png" alt="">
+          <img src="../images/<%= user.profile_picture %>" alt="">
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -104,7 +104,7 @@
       </div>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/chef.png" alt="">
+          <img src="../images/<%= user.profile_picture %>" alt="">
           <span class="admin_name">
             <%= user.username %>
           </span>

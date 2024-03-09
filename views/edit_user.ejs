@@ -73,7 +73,7 @@
           </div>
           <div class="profile-details">
             <% if (session) { %>
-              <img src="../images/chef.png" alt="">
+              <img src="../images/<%= user.profile_picture %>" alt="">
               <span class="admin_name">
                 <%= session.username %>
               </span>
@@ -93,7 +93,7 @@
             <% if (user) { %>
               <div class="col-12 col-sm-auto mb-3">
                 <div class="mx-auto" style="width: 160px;">
-                  <img src="../images/chef.png" width="150" height="150" class="rounded-circle" alt="">
+                  <img src="../images/<%= user.profile_picture %>" width="150" height="150" class="rounded-circle" alt="">
                   <br>
                 </div>
               </div>

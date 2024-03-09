@@ -78,7 +78,7 @@
       </div>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/chef.png" alt="">
+          <img src="../images/<%= user.profile_picture %>" alt="">
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -103,7 +103,7 @@
       </div>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/chef.png" alt="">
+          <img src="../images/<%= user.profile_picture %>" alt="">
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -128,7 +128,7 @@
                   <div class="user-info">
                     <div class="user-info">
                       <% showPosts.forEach(function(showpost) { %>
-                        <img src="../images/chef.png" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                        <img src="../images/<%= user.profile_picture %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
                       <span class="username">
                       </span>
                     </div>
@@ -217,7 +217,7 @@
             <% comments.forEach(function(comment) { %>
               <ul class="comments">
                 <li class="comment">
-                  <img src="../images/chef.png" alt="ผู้ใช้งาน">
+                  <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
                   <div class="comment-content">
                     <span class="username">ชื่อผู้ใช้งาน</span>
                     <span class="comment-date">
