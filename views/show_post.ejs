@@ -41,28 +41,28 @@
           <i class="bi bi-archive"></i>
           <span class="links_name"></c> กระทู้ของฉัน</span>
         </a>
-        <li>
-          <a href="/profile">
-            <i class="bi bi-person-circle"></i>
-            <span class="links_name"></c> โปรไฟล์</span>
-          </a>
-      </li>
-      <% if (user && user.isAdmin == 'Y') { %>
       <li>
-        <a href="/adminBKB">
-          <i class="bi bi-info-circle"></i>
-          <span class="links_name"></c> Dashboard</span>
+        <a href="/profile">
+          <i class="bi bi-person-circle"></i>
+          <span class="links_name"></c> โปรไฟล์</span>
         </a>
       </li>
-      <% } %>
-      <% if (user) { %>
-      <li class="log_out">
-        <a href="/logout">
-          <i class='bx bx-log-out'></i>
-          <span class="links_name">Log out</span>
-        </a>
-      </li>
-      <% } %>
+      <% if (user && user.isAdmin=='Y' ) { %>
+        <li>
+          <a href="/adminBKB">
+            <i class="bi bi-info-circle"></i>
+            <span class="links_name"></c> Dashboard</span>
+          </a>
+        </li>
+        <% } %>
+          <% if (user) { %>
+            <li class="log_out">
+              <a href="/logout">
+                <i class='bx bx-log-out'></i>
+                <span class="links_name">Log out</span>
+              </a>
+            </li>
+            <% } %>
     </ul>
   </div>
 
@@ -91,167 +91,189 @@
             <% } %>
       </div>
     </nav>
-  <section class="home-section">
-    <nav>
-      <div class="sidebar-button">
-        <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Board</span>
-      </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search'></i>
-      </div>
-      <div class="profile-details">
-        <% if (user) { %>
-          <img src="../images/<%= user.profile_picture %>" alt="">
-          <span class="admin_name">
-            <%= user.username %>
-          </span>
-          <!-- <a href="/logout">ออกจากระบบ</a> -->
-          <% } else { %>
-            <!-- <span>Guest</span> -->
-            <a href="/login">เข้าสู่ระบบ</a>
-            &emsp;
-            <a href="/signup">สมัครสมาชิก</a>
-            <% } %>
-      </div>
-    </nav>
-
-    <div class="home-content">
-      <div class="lish-boxes">
-        <div class="recent-lish box">
-          <div class="lish-details">
-            <div class="header_wrap">
-
-              <div class="post-container">
-                <div class="post-header">
-                  <div class="user-info">
-                    <div class="user-info">
-                      <% showPosts.forEach(function(showpost) { %>
-                        <img src="../images/<%= user.profile_picture %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
-                      <span class="username">
-                      </span>
-                    </div>
-                    <% if (Users) { %>
-                    <span class="username"><%= Users %></span>
-                    <% } %>
-                  </div>
-                  <div class="post-date">
-                      
-                        <i class="fa fa-calendar">
-                          <%= showpost.post_create %>
-                        </i>
-                  </div>
-                </div>
-                <title>Show Post</title>
-                <t class="section-content">
-                  <%= showpost.topic %>
-                </t>
-                <div class="post-content">
-                  <p>
-                    <%= showpost.details %><br>
-                      <a href="../images/<%= showpost.post_pic %>" target="_blank">
-                        <% if (showpost.post_pic && showpost.post_pic !=="null" ) { %>
-                          <img src="../images/<%= showpost.post_pic %>" alt="รูปภาพที่แนบมากับโพสต์"
-                            style="width: 50%; height: auto; max-width: 100%; max-height: 100%;">
-                          <% } %>
-                      </a>
-                  </p>
-                </div>
-                <div class="post-footer">
-                  <div class="like-dislike">
-                    <button
-                      style="color: rgb(227, 242, 255); background-color: rgb(65, 153, 240); width: 5%; border-radius: 25%; border: none;"
-                      class="dislike-button"><i
-                        class="fa-regular fa-thumbs-up"></i>15</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button
-                      style="color: rgb(227, 242, 255); background-color: rgb(204, 63, 63);  width: 5%; border-radius: 25%; border: none"
-                      class="dislike-button"><i class="fa-regular fa-thumbs-down"></i>3</button>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
+    <section class="home-section">
+      <nav>
+        <div class="sidebar-button">
+          <i class='bx bx-menu sidebarBtn'></i>
+          <span class="dashboard">Board</span>
         </div>
-      </div>
-      <div class="home-content2">
+        <div class="search-box">
+          <input type="text" placeholder="Search...">
+          <i class='bx bx-search'></i>
+        </div>
+        <div class="profile-details">
+          <% if (user) { %>
+            <img src="../images/<%= user.profile_picture %>" alt="">
+            <span class="admin_name">
+              <%= user.username %>
+            </span>
+            <!-- <a href="/logout">ออกจากระบบ</a> -->
+            <% } else { %>
+              <!-- <span>Guest</span> -->
+              <a href="/login">เข้าสู่ระบบ</a>
+              &emsp;
+              <a href="/signup">สมัครสมาชิก</a>
+              <% } %>
+        </div>
+      </nav>
+
+      <div class="home-content">
         <div class="lish-boxes">
-          <div class="recent-lish box2">
-            <div class="comment-title">แสดงความคิดเห็น</div>
+          <div class="recent-lish box">
             <div class="lish-details">
               <div class="header_wrap">
-                <section class="board">
-                  <section class="comment-section">
-                    <% if (user) { %>
-                      <form action="/comments" method="post" enctype="multipart/form-data">
-                        <textarea name="topic" id="topic" rows="5" placeholder="เขียนความคิดเห็นของคุณ..."></textarea><br>
-                        <label for="comment_pic">รูปภาพ:</label><br>
-                        <input type="file" id="comment_pic" name="comment_pic" accept="image/*">
-                        <input type="hidden" name="detail" value="null">
-                        <input type="hidden" name="Posts_id" value="<%= showpost.id %>">
-                        <input type="hidden" name="Posts_Users_uid" value="<%= showpost.Users_uid %>">
-                        <br>
-                        <br>
-                        <span class="color">
-                          
 
-                          <button class="post-button" type="submit" onclick="location.href='#'">โพสต์</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                          <button class="cancel-button" type="button" onclick="location.href='#'">ยกเลิก</button>
+                <div class="post-container">
+                  <div class="post-header">
+                    <div class="user-info">
+                      <div class="user-info">
+                        <% showPosts.forEach(function(showpost) { %>
+                          <% if (profilepic) { %>
+                            <img src="../images/<%= profilepic %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                            <% } %>
+
+                              <span class="username">
+                              </span>
+                      </div>
+                      <% if (Users) { %>
+                        <span class="username">
+                          <%= Users %>
                         </span>
-                      </form>
-                    <% } else { %>
-                      <p>Please <a href="/login">login</a> to comment.</p>
-                    <% } %>
-                    <% }) %>
-                  </section>
-                </section>
+                        <% } %>
+                    </div>
+                    <div class="post-date">
+
+                      <i class="fa fa-calendar">
+                        <%= showpost.post_create %>
+                      </i>
+                    </div>
+                  </div>
+                  <title>Show Post</title>
+                  <t class="section-content">
+                    <%= showpost.topic %>
+                  </t>
+                  <div class="post-content">
+                    <p>
+                      <%= showpost.details %><br>
+                        <a href="../images/<%= showpost.post_pic %>" target="_blank">
+                          <% if (showpost.post_pic && showpost.post_pic !=="null" ) { %>
+                            <img src="../images/<%= showpost.post_pic %>" alt="รูปภาพที่แนบมากับโพสต์"
+                              style="width: 50%; height: auto; max-width: 100%; max-height: 100%;">
+                            <% } %>
+                        </a>
+                    </p>
+                  </div>
+                  <div class="post-footer">
+                    <div class="like-dislike">
+                      <button
+                        style="color: rgb(227, 242, 255); background-color: rgb(65, 153, 240); width: 5%; border-radius: 25%; border: none;"
+                        class="dislike-button"><i
+                          class="fa-regular fa-thumbs-up"></i>15</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button
+                        style="color: rgb(227, 242, 255); background-color: rgb(204, 63, 63);  width: 5%; border-radius: 25%; border: none"
+                        class="dislike-button"><i class="fa-regular fa-thumbs-down"></i>3</button>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
-        <br>
-        <div class="comment-title">ความคิดเห็น</div>
-        <section class="board">
-          <section class="comment-section">
-            <% comments.forEach(function(comment) { %>
-              <ul class="comments">
-                <li class="comment">
-                  <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
-                  <div class="comment-content">
-                    <span class="username">ชื่อผู้ใช้งาน</span>
-                    <span class="comment-date">
-                      <%= comment.comment_create %>
-                    </span>
-                    <p class="comment-text">
-                      <%= comment.topic %><br>
-                    </p>
-                    <% if (comment.comment_pic && comment.comment_pic !== "null") { %>
-                      <a href="../images/<%= comment.comment_pic %>" target="_blank">
-                        <img src="../images/<%= comment.comment_pic %>" alt="รูปภาพที่แนบมากับความคิดเห็น" style="width: 20%; height: auto; max-width: 100%; max-height: 100%;"><br>
-                      </a>
-                    <% } %>
-                  </div>
-                </li>
-              </ul>
-              <% }) %>
-          </section>
-        </section>
+        <div class="home-content2">
+          <div class="lish-boxes">
+            <div class="recent-lish box2">
+              <div class="comment-title">แสดงความคิดเห็น</div>
+              <div class="lish-details">
+                <div class="header_wrap">
+                  <section class="board">
+                    <section class="comment-section">
+                      <% if (user) { %>
+                        <form action="/comments" method="post" enctype="multipart/form-data">
+                          <textarea name="topic" id="topic" rows="5"
+                            placeholder="เขียนความคิดเห็นของคุณ..."></textarea><br>
+                          <label for="comment_pic">รูปภาพ:</label><br>
+                          <input type="file" id="comment_pic" name="comment_pic" accept="image/*">
+                          <input type="hidden" name="detail" value="null">
+                          <input type="hidden" name="Posts_id" value="<%= showpost.id %>">
+                          <input type="hidden" name="Posts_Users_uid" value="<%= showpost.Users_uid %>">
+                          <br>
+                          <br>
+                          <span class="color">
 
+
+                            <button class="post-button" type="submit"
+                              onclick="location.href='#'">โพสต์</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="cancel-button" type="button" onclick="location.href='#'">ยกเลิก</button>
+                          </span>
+                        </form>
+                        <% } else { %>
+                          <p>Please <a href="/login">login</a> to comment.</p>
+                          <% } %>
+                            <% }) %>
+                    </section>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="comment-title">ความคิดเห็น</div>
+          <section class="board">
+            <section class="comment-section">
+              <% comments.forEach(function(comment) { %>
+                <ul class="comments">
+                  <li class="comment">
+                    <img src="../images/chef.png" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <div class="comment-content">
+
+                      <span class="username">
+                        username
+                      </span>
+
+                      <span class="comment-date">
+                        <%= comment.comment_create %>
+                      </span>
+                      <p class="comment-text">
+                        <%= comment.topic %><br>
+                      </p>
+                      <% if (comment.comment_pic && comment.comment_pic !=="null" ) { %>
+                        <a href="../images/<%= comment.comment_pic %>" target="_blank">
+                          <img src="../images/<%= comment.comment_pic %>" alt="รูปภาพที่แนบมากับความคิดเห็น"
+                            style="width: 20%; height: auto; max-width: 100%; max-height: 100%;"><br>
+                        </a>
+                    </div>
+                    <% } %>
+                    
+                    <% if (user && user.uid === comment.Users_uid) { %>
+                      <form action="/editcomments" method="post">
+                        <input type="hidden" name="id" value="<%= comment.id %>">
+                        <input type="hidden" name="Posts_id" value="<%= comment.Posts_id %>">
+                        <input type="hidden" name="Posts_Users_uid" value="<%= comment.Posts_Users_uid %>">
+                        <input type="hidden" name="Users_uid" value="<%= comment.Users_uid %>">
+                        <button class="edit-button" type="submit">แก้ไข</button>
+                        <button class="remove-button" type="submit" formaction="/deletecomments">ลบ</button>
+                      </form>
+                    <% } %>
+                </ul>
+                <% }) %>
+            </section>
+          </section>
+        </div>
       </div>
-    </div>
+    </section>
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".sidebarBtn");
+      sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+          sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+      }
+    </script>
   </section>
-  <script>
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".sidebarBtn");
-    sidebarBtn.onclick = function () {
-      sidebar.classList.toggle("active");
-      if (sidebar.classList.contains("active")) {
-        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-      } else
-        sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-    }
-  </script>
 </body>
 
 </html>

@@ -50,6 +50,7 @@ app.post('/edit_password', require('./routes/admin'));
 app.post('/delete_user', require('./routes/admin'));
 
 app.post('/comments', require('./routes/board'));
+app.post('/editcomments ', require('./routes/board'));
 app.post('/deletecomments', require('./routes/board'));
 
 app.listen(3000, () => {

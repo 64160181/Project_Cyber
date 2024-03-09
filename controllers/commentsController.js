@@ -41,7 +41,44 @@ module.exports = {
     res.redirect(`/show_post/${inputData.Posts_id}`);
     });
     }
-    )}
+    )},
+    deletecomments: (req, res) => {
+      console.log(req.body);
+      const inputData = {
+        id: req.body.id,
+        Posts_id: req.body.Posts_id,
+        Post_Users_uid : req.body.Post_Users_uid,
+        Users_uid : req.session.user.uid
+      };
+      commentsmodel.deletecomments(inputData.id, inputData.Posts_id, inputData.Post_Users_uid, inputData.Users_uid, (error) => {
+        if (error) {
+          console.error('Error deleting comments:', error);
+          return res.status(500).json({
+            message: 'Internal Server Error',
+          });
+        }
+        res.redirect(`/show_post/${inputData.Posts_id}`);
+      });
+    },
+    editcomments: (req, res) => { 
+      const inputData = {
+        id: req.body.id,
+        Posts_id: req.body.Posts_id,
+        Post_Users_uid : req.body.Post_Users_uid,
+        Users_uid : req.session.user.uid,
+        topic: req.body.topic,
+        detail: req.body.detail,
+      };
+      commentsmodel.editcomments(inputData.id, inputData.topic, inputData.detail, (error) => {
+        if (error) {
+          console.error('Error editing comments:', error);
+          return res.status(500).json({
+            message: 'Internal Server Error',
+          });
+        }
+        res.redirect(`/show_post/${inputData.Posts_id}`);
+      });
+    }
 }
   //   console.log(req.body);
   //   const inputData = {

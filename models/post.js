@@ -37,8 +37,8 @@ module.exports = {
             return callback(null, results);
         });
     },
-    deletePost: (user_uid,id, callback) => {
-        const query = `DELETE FROM posts WHERE id = '${id}' AND users_uid = '${user_uid}'`;
+    deletePost: (user_uid, id, callback) => {
+        const query = `DELETE FROM posts WHERE id = '${id}' AND users_uid = '${user_uid}';`;
         connection.query(query, (error, results) => {
             if (error) {
                 console.error('Error deleting post:', error);
