@@ -55,7 +55,7 @@ app.post('/editcomments', require('./routes/board'));
 app.post('/editcommentsview', require('./routes/board'));
 app.post('/deletecomments', require('./routes/board'));
 
-
+app.get('/profile/:id', require('./routes/profile'));
 app.get('/search_data', require('./routes/search'));
 app.get('/search_users', require('./routes/search'));
 

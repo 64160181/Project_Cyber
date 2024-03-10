@@ -20,22 +20,7 @@ module.exports = {
             res.render('profile', { title: 'Profile', user: req.session.user });
         }
     },
-    viewUserProfile: function (req, res) {
-        const inputData = {
-            uid: req.params.id,
-        };
-        usermodel.getUser(inputData, (error, result) => {
-            if (error) {
-                console.error('Error fetching user:', error);
-                return res.status(500).json({
-                    message: 'Internal Server Error',
-                });
-            }
-            if (result) {
-                return res.render('user_profile', { user: req.session.user, profile: result });
-            }
-        });
-    },
+
     editProfileView: function (req, res) {
         res.render('edit_profile', { title: 'Edit Profile', user: req.session.user });
     },
