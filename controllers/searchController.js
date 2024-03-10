@@ -10,7 +10,7 @@ module.exports = {
 	},
 	search_users: function (req, res) {
 		var search_query = req.query.search_query;
-		var query = `SELECT username FROM users WHERE username LIKE '%${search_query}%' LIMIT 10`;
+		var query = `SELECT uid,username FROM users WHERE username LIKE '%${search_query}%' LIMIT 10`;
 		connection.query(query, function (error, data) {
 			if (error) {
 				console.error('Error fetching users:', error);
