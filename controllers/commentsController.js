@@ -1,4 +1,5 @@
 const commentsmodel = require('../models/comments.js');
+const adminModel = require('../models/admin');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -10,6 +11,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 const connection = require('../models/ConMysql.js');
+const admin = require('../models/admin');
 module.exports = {
   showpostView: (req, res) => {
     res.render('show_post', { user: req.session.user });
@@ -41,22 +43,83 @@ module.exports = {
     res.redirect(`/show_post/${inputData.Posts_id}`);
     });
     }
-    )}
-}
-  //   console.log(req.body);
-  //   const inputData = {
-  //     topic: req.body.topic,
-  //     details: req.body.details,
-  //     post_pic: req.file.filename, // Assuming you have a file upload middleware that saves the file and adds the filename to req.file
-  //     users_uid: req.session.user.uid,
-  //   };
-  //   postmodel.addNewPost(inputData.topic, inputData.details, inputData.post_pic, inputData.users_uid, (error, result) => {
-  //     if (error) {
-  //       console.error('Error creating post:', error);
-  //       return res.status(500).json({
-  //         message: 'Internal Server Error',
-  //       });
-  //     }
-  //     res.redirect('/');
-  //   });
-  // },
+    )},
+    deletecomments: (req, res) => {
+      console.log(req.body);
+      const inputData = {
+        id: req.body.id,
+        Posts_id: req.body.Posts_id,
+        Post_Users_uid : req.body.Post_Users_uid,
+        Users_uid : req.session.user.uid
+      };
+      adminModel.disable_foreign_key((error, result) => {
+        if (error) {
+          console.error('Error disabling foreign key:', error);
+          return res.status(500).json({
+            message: 'Internal Server Error',
+          });
+        }
+        if (result) {
+          commentsmodel.deletecomments(inputData.id, inputData.Posts_id, inputData.Post_Users_uid, inputData.Users_uid, (error) => {
+            if (error) {
+              console.error('Error deleting comments:', error);
+              return res.status(500).json({
+                message: 'Internal Server Error',
+              });
+            } else {
+              adminModel.enable_foreign_key((error, result) => {
+                if (error) {
+                  console.error('Error enabling foreign key:', error);
+                  return res.status(500).json({
+                    message: 'Internal Server Error',
+                  });
+                }
+                if (result) {
+                  res.redirect(`/show_post/${inputData.Posts_id}`);
+                }
+              });
+            }
+          }
+          );
+        }
+      }
+      );
+    },
+    editcomments: (req, res) => { 
+      upload.single('comment_pic')(req, res, (err) => {
+        const inputData = {
+          topic: req.body.topic,
+          detail: req.body.detail,
+          comment_pic: req.file ? req.file.filename : null,
+          id: req.body.id,
+          Posts_id: req.body.posts_id,
+          Post_Users_uid: req.body.Posts_Users_uid,
+          Users_uid: req.session.user.uid
+        };
+        
+        commentsmodel.editcomments(inputData.topic, inputData.detail, inputData.comment_pic, inputData.id, inputData.Posts_id, inputData.Post_Users_uid, inputData.Users_uid, (error,result) => {
+          if (error) {
+            console.error('Error updating comments:', error);
+            return res.status(500).json({
+              message: 'Internal Server Error',
+            });
+          }
+          if (result) {
+            res.redirect(`/show_post/${inputData.Posts_id}`);
+          }
+        }
+        );
+      }
+      );
+    },
+    editcommentsView: (req, res) => {
+      connection.query('SELECT * FROM comments WHERE id = ?', [req.body.id], (error, results) => {
+          if (error) {
+              console.error('Error fetching comments: ', error);
+              res.status(500).send('Internal Server Error');
+          } else {
+              res.render('edit_comments', { comments: results, user: req.session.user });
+          }
+      });
+  },
+};

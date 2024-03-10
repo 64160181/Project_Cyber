@@ -141,4 +141,19 @@ module.exports = {
         return callback(null, null);
         });
     },
+    updateprofilepicture: function(inputData, callback) {
+        const { uid,profile_picture } = inputData;
+        const query = `UPDATE users SET profile_picture = '${profile_picture}' WHERE uid = '${uid}'`;
+        
+        connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error updating user:', error);
+            return callback(error, null);
+        }
+
+        if (results.affectedRows > 0) {
+            return callback(null, inputData);
+        }
+    });
+}
 };

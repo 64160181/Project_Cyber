@@ -1,8 +1,10 @@
 const postmodel = require('../models/post');
 const connection = require('../models/ConMysql.js');
+const adminmodel = require('../models/admin');
 
 const multer = require('multer');
 const session = require('express-session');
+const admin = require('../models/admin');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/images/');
@@ -94,15 +96,37 @@ module.exports = {
             users_uid: req.session.user.uid,
             post_id: req.body.post_id,
         };
-        postmodel.deletePost(inputData.users_uid, inputData.post_id, (error, result) => {
+        adminmodel.disable_foreign_key((error, result) => {
             if (error) {
-                console.error('Error deleting post:', error);
+                console.error('Error disabling foreign key:', error);
                 return res.status(500).json({
                     message: 'Internal Server Error',
                 });
+            } if (result) {
+                postmodel.deletePost(inputData.users_uid, inputData.post_id, (error, result) => {
+                    if (error) {
+                        console.error('Error deleting post:', error);
+                        return res.status(500).json({
+                            message: 'Internal Server Error',
+                        });
+                    }
+                    if (result) {
+                        adminmodel.enable_foreign_key((error, result) => {
+                            if (error) {
+                                console.error('Error enabling foreign key:', error);
+                                return res.status(500).json({
+                                    message: 'Internal Server Error',
+                                });
+                            }
+                            if (result) {
+                                res.redirect('/');
+                            }
+                        });
+                    }
+                });
             }
-            res.redirect('/');
-        });
+        }
+        );
     },
     edit_post_view : (req, res) => {
         connection.query('SELECT * FROM Posts WHERE id = ?', [req.body.post_id], (error, results) => {
@@ -110,7 +134,7 @@ module.exports = {
                 console.error('Error fetching posts: ', error);
                 res.status(500).send('Internal Server Error');
             } else {
-                res.render('edit_board', { post: results[0].id, user: req.session.user });
+                res.render('edit_board', { post: results[0], user: req.session.user });
             }
         });
     }

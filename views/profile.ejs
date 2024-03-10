@@ -37,28 +37,28 @@
           <i class="bi bi-archive"></i>
           <span class="links_name"></c> กระทู้ของฉัน</span>
         </a>
-        <li>
-          <a href="/profile" class="active">
-            <i class="bi bi-person-circle"></i>
-            <span class="links_name"></c> โปรไฟล์</span>
-          </a>
-      </li>
-      <% if (user && user.isAdmin == 'Y') { %>
       <li>
-        <a href="/adminBKB">
-          <i class="bi bi-info-circle"></i>
-          <span class="links_name"></c> Dashboard</span>
+        <a href="/profile" class="active">
+          <i class="bi bi-person-circle"></i>
+          <span class="links_name"></c> โปรไฟล์</span>
         </a>
       </li>
-      <% } %>
-      <% if (user) { %>
-      <li class="log_out">
-        <a href="/logout">
-          <i class='bx bx-log-out'></i>
-          <span class="links_name">Log out</span>
-        </a>
-      </li>
-      <% } %>
+      <% if (user && user.isAdmin=='Y' ) { %>
+        <li>
+          <a href="/adminBKB">
+            <i class="bi bi-info-circle"></i>
+            <span class="links_name"></c> Dashboard</span>
+          </a>
+        </li>
+        <% } %>
+          <% if (user) { %>
+            <li class="log_out">
+              <a href="/logout">
+                <i class='bx bx-log-out'></i>
+                <span class="links_name">Log out</span>
+              </a>
+            </li>
+            <% } %>
     </ul>
   </div>
 
@@ -74,7 +74,7 @@
       </div>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/chef.png" alt="">
+          <img src="../images/<%= user.profile_picture %>" alt="">
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -89,75 +89,43 @@
     </nav>
 
 
-<% if (user) { %>
-    <div class="home-content">
-      <div class="lish-boxes">
-        <div class="recent-lish box">
-          <div class="container">
-            <div class="row align-items-center flex-row-reverse">
-              <div class="col-lg-6">
-                <div class="about-text go-to">
-                  <h3 class="dark-color">About Me</h3>
-                  <h6 class="theme-color lead">Display Name : <%= user.display_name %></h6>
-                  <h6 class="theme-color lead">Email : <%= user.email %></h6>
-                  <!-- <div class="row about-list">
-                    <div class="col-md-6">
-                      <div class="media">
-                        <label>Birthday</label>
-                        <p>4th april 1998</p>
-                      </div>
-                      <div class="media">
-                        <label>Age</label>
-                        <p>22 Yr</p>
-                      </div>
-                      <div class="media">
-                        <label>Residence</label>
-                        <p>Canada</p>
-                      </div>
-                      <div class="media">
-                        <label>Address</label>
-                        <p>California, USA</p>
+    <% if (user) { %>
+      <div class="home-content">
+        <div class="lish-boxes">
+          <div class="recent-lish box">
+            <div class="container">
+              <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-6">
+                  <div class="about-text go-to">
+                    <h3 class="dark-color">About Me</h3>
+                    <h6 class="theme-color lead">Display Name : <%= user.display_name %>
+                    </h6>
+                    <h6 class="theme-color lead">Email : <%= user.email %>
+                    </h6>
+                    <div class="row about-list">
+                      <div class="col-md-6">
+                        <div class="media">
+                          <br>
+                          <a class="btn btn-primary edit-profile" type="submit" href="/editProfile">Edit Profile</a>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="media">
-                        <label>E-mail</label>
-                        <p>info@domain.com</p>
-                      </div>
-                      <div class="media">
-                        <label>Phone</label>
-                        <p>820-885-3321</p>
-                      </div>
-                      <div class="media">
-                        <label>Skype</label>
-                        <p>skype.0404</p>
-                      </div>
-                      <div class="media">
-                        <label>Freelance</label>
-                        <p>Available</p>
-                      </div>
-                    </div>
-                  </div> -->
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="about-avatar">
-                  <img src="../images/chef.png" title="" alt="">
+                <div class="col-lg-6">
+                  <div class="about-avatar">
+                    <img src="../images/<%= user.profile_picture %>" title="" alt="">
+                  </div>
                 </div>
-              </div>
-              <div class="button">
-                <br>
-                <a class="btn btn-primary edit-profile" type="submit" href="/editProfile">Edit Profile</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <% } %>
+      <% } %>
 
-    </div>
-    </section>
+        </div>
+  </section>
 
 
   <script>

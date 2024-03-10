@@ -74,7 +74,7 @@
       </div>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/chef.png" alt="">
+          <img src="../images/<%= user.profile_picture %>" alt="">
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -111,7 +111,7 @@
                 <tr>
                   <td><%= user.uid %></td>
                   <td>
-                    <img src="../images/chef.png" alt="ผู้ใช้งาน">
+                    <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
                   </td>
                   <td> <%= user.username %></td>
                   <td> <%= user.email %></td>
@@ -136,7 +136,7 @@
                 <!-- <tr>
                   <td>2</td>
                   <td>
-                    <img src="../images/chef.png" alt="ผู้ใช้งาน">
+                    <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
                   </td>
                   <td>Anna</td>
                   <td>erat@veum.ca</td>

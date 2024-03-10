@@ -65,6 +65,27 @@ module.exports = {
             
             return callback(null, results);
         });
+    },
+    disable_foreign_key : function (callback) {
+        const query = 'SET FOREIGN_KEY_CHECKS=0';
+        connection.query(query, (error, results) => {
+            if (error) {
+                console.error('Error:', error);
+                return callback(error, null);
+            } 
+            
+            return callback(null, results);
+        });
+    },
+    enable_foreign_key : function(callback) {
+        const query = 'SET FOREIGN_KEY_CHECKS=1';
+        connection.query(query, (error, results) => {
+            if (error) {
+                console.error('Error:', error);
+                return callback(error, null);
+            } 
+            
+            return callback(null, results);
+        });
     }
-
 };

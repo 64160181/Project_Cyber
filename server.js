@@ -32,6 +32,7 @@ app.get('/profile', require('./routes/profile'));
 app.get('/editProfile', require('./routes/profile'));
 app.post('/update_user', require('./routes/profile'));
 app.post('/update_password', require('./routes/profile'));
+app.post('/update_profile', require('./routes/profile'));
 
 app.get('/post_board', require('./routes/board'));
 app.get('/my_board', require('./routes/board'));
@@ -49,7 +50,9 @@ app.post('/edit_password', require('./routes/admin'));
 app.post('/delete_user', require('./routes/admin'));
 
 app.post('/comments', require('./routes/board'));
-
+app.post('/editcomments', require('./routes/board'));
+app.post('/editcommentsview', require('./routes/board'));
+app.post('/deletecomments', require('./routes/board'));
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');
