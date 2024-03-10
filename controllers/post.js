@@ -22,8 +22,8 @@ module.exports = {
             if (error) {
                 console.error('Error creating post:', error);
                 return callback(error, null);
-            } 
-            
+            }
+
             return callback(null, results);
         });
     },

@@ -11,29 +11,38 @@ services:
   server:
     build:
       context: .
+    restart: unless-stopped
+    env_file:
+      - ./.env
     environment:
-      NODE_ENV: production
+      - DB_HOST=db
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
     ports:
-      - 3000:3000
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    stdin_open: true
+    tty: true
     volumes:
-      - .:/app
+      - vol-server:/usr/src/app
     command: npm start
     depends_on:
       - db
       
   db:
-    image: mysql
+    image: mysql:5.7
     restart: always
+    env_file:
+      - ./.env
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_USER=myuser
-      - MYSQL_PASSWORD=mypassword
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_DOCKER_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db-data:/var/lib/mysql
-    expose:
-      - 3306
-
+    
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
@@ -49,6 +58,7 @@ services:
       - db
 volumes:
   db-data:
+  vol-server:
 
     # The commented out section below is an example of how to define a PostgreSQL
     # database that your application can use. `depends_on` tells Docker Compose to
@@ -82,4 +92,3 @@ volumes:
     # secrets:
     #   db-password:
     #     file: db/password.txt
-

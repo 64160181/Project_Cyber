@@ -34,7 +34,7 @@ module.exports = {
         console.error('Error deleting comments:', error);
         return callback(error, null);
       }
-      console.log('Deleted comments successfully',results);
+      console.log('Deleted comments successfully', results);
       return callback(null, results);
     });
   },

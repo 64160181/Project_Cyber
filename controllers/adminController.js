@@ -4,14 +4,14 @@ const usermodel = require('../models/user');
 
 
 module.exports = {
-    adminView : function(req, res) {
+    adminView: function (req, res) {
         if (!req.session.user || req.session.user.isAdmin !== 'Y') {
             res.redirect('/');
             return;
         }
         adminModel.showUser(req, res);
     },
-    viewUserProfile : function(req, res) {
+    viewUserProfile: function (req, res) {
         if (!req.session.user || req.session.user.isAdmin !== 'Y') {
             res.redirect('/');
             return;
@@ -27,14 +27,14 @@ module.exports = {
                 });
             }
             if (result) {
-                return res.render('view_user', { user: result , session: req.session.user});
+                return res.render('view_user', { user: result, session: req.session.user });
             }
             return res.status(404).json({
                 message: 'User not found',
             });
         });
     },
-    editUserView : function(req, res) {
+    editUserView: function (req, res) {
         if (!req.session.user || req.session.user.isAdmin !== 'Y') {
             res.redirect('/');
             return;
@@ -45,9 +45,9 @@ module.exports = {
             email: req.body.email,
             display_name: req.body.display_name,
         };
-        res.render('edit_user', { user: inputData, session: req.session.user});
+        res.render('edit_user', { user: inputData, session: req.session.user });
     },
-    editUser : function(req, res) {
+    editUser: function (req, res) {
         if (!req.session.user || req.session.user.isAdmin !== 'Y') {
             res.redirect('/');
             return;
@@ -70,7 +70,7 @@ module.exports = {
             }
         });
     },
-    editPassword : function(req, res) {
+    editPassword: function (req, res) {
         if (!req.session.user || req.session.user.isAdmin !== 'Y') {
             res.redirect('/');
             return;
@@ -86,7 +86,7 @@ module.exports = {
         };
         if (inputData.newpassword !== inputData.confirmpassword) {
             req.flash('error', 'Password does not match');
-            return res.render('edit_user', { user: inputData, messages: req.flash('error'), session: req.session.user});
+            return res.render('edit_user', { user: inputData, messages: req.flash('error'), session: req.session.user });
         } else {
             adminModel.updatePassword(inputData, (error, result) => {
                 if (error) {
@@ -101,7 +101,7 @@ module.exports = {
             });
         }
     },
-    deleteUser : function(req, res) {
+    deleteUser: function (req, res) {
         if (!req.session.user || req.session.user.isAdmin !== 'Y') {
             res.redirect('/');
             return;
@@ -138,22 +138,8 @@ module.exports = {
                         });
                     }
                 });
-            } 
+            }
         }
         );
     }
 };
-
-//         adminModel.deleteUser(inputData, (error, result) => {
-//             if (error) {
-//                 console.error('Error deleting user:', error);
-//                 return res.status(500).json({
-//                     message: 'Internal Server Error',
-//                 });
-//             }
-//             if (result) {
-//                 return res.redirect('/adminBKB');
-//             }
-//         });
-//     },
-// };

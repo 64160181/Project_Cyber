@@ -2,7 +2,7 @@ const connection = require('./ConMysql');
 const bcypt = require('bcrypt');
 module.exports = {
     showUser: function (req, res) {
-        connection.query('SELECT * FROM Users', (error, results) => {
+        connection.query('SELECT * FROM users', (error, results) => {
             if (error) {
                 console.error('Error fetching posts: ', error);
                 res.status(500).send('Internal Server Error');

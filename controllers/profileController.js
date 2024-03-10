@@ -20,6 +20,7 @@ module.exports = {
             res.render('profile', { title: 'Profile', user: req.session.user });
         }
     },
+
     editProfileView: function (req, res) {
         res.render('edit_profile', { title: 'Edit Profile', user: req.session.user });
     },

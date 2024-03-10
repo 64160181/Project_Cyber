@@ -54,12 +54,12 @@ module.exports = {
             // Redirect to login page if user is not logged in
             return res.redirect('/login');
         } else {
-            connection.query('SELECT * FROM Users', (error, userResults) => {
+            connection.query('SELECT * FROM users', (error, userResults) => {
                 if (error) {
                     console.error('Error fetching users: ', error);
                     res.status(500).send('Internal Server Error');
                 } else {
-                    connection.query('SELECT * FROM Posts', (error, postResults) => {
+                    connection.query('SELECT * FROM posts', (error, postResults) => {
                         if (error) {
                             console.error('Error fetching posts: ', error);
                             res.status(500).send('Internal Server Error');
@@ -73,23 +73,23 @@ module.exports = {
     },
     edit_post: (req, res) => {
         upload.single('post_pic')(req, res, (err) => {
-        console.log('req.body',req.body);
-        const inputData = {
-            topic: req.body.topic,
-            details: req.body.details,
-            post_pic: req.file ?  req.file.filename : null,
-            post_id: req.body.post_id,
-        };
-        postmodel.editPost(inputData.topic, inputData.details, inputData.post_pic, inputData.post_id, (error, result) => {
-            if (error) {
-                console.error('Error editing post:', error);
-                return res.status(500).json({
-                    message: 'Internal Server Error',
-                });
-            }
-            res.redirect('/');
+            console.log('req.body', req.body);
+            const inputData = {
+                topic: req.body.topic,
+                details: req.body.details,
+                post_pic: req.file ? req.file.filename : null,
+                post_id: req.body.post_id,
+            };
+            postmodel.editPost(inputData.topic, inputData.details, inputData.post_pic, inputData.post_id, (error, result) => {
+                if (error) {
+                    console.error('Error editing post:', error);
+                    return res.status(500).json({
+                        message: 'Internal Server Error',
+                    });
+                }
+                res.redirect('/');
+            });
         });
-    });
     },
     delete_post: (req, res) => {
         const inputData = {
@@ -128,8 +128,8 @@ module.exports = {
         }
         );
     },
-    edit_post_view : (req, res) => {
-        connection.query('SELECT * FROM Posts WHERE id = ?', [req.body.post_id], (error, results) => {
+    edit_post_view: (req, res) => {
+        connection.query('SELECT * FROM posts WHERE id = ?', [req.body.post_id], (error, results) => {
             if (error) {
                 console.error('Error fetching posts: ', error);
                 res.status(500).send('Internal Server Error');

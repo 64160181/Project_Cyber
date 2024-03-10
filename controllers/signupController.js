@@ -24,7 +24,7 @@ module.exports = {
 			}
 			if (result) {
 				req.flash('error', 'Username already exists');
-				return res.render('signup', { messages: req.flash('error') });	
+				return res.render('signup', { messages: req.flash('error') });
 			}
 			usermodel.validateEmail(inputData, (error, result) => {
 				if (error) {
@@ -44,7 +44,7 @@ module.exports = {
 					usermodel.createUser(inputData);
 					// req.flash('success', 'User created successfully');
 					// return res.render('signup', { messages: req.flash('success') });
-					   res.redirect('/login');
+					res.redirect('/login');
 				}
 			});
 		});

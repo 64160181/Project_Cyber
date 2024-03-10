@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', require('./routes/index'));
 app.get('/logout', require('./routes/index'));
+app.get('/all_member', require('./routes/all_member'));
 
 app.get('/login', require('./routes/login'));
 app.post('/loginUser', require('./routes/login'));
@@ -53,6 +54,10 @@ app.post('/comments', require('./routes/board'));
 app.post('/editcomments', require('./routes/board'));
 app.post('/editcommentsview', require('./routes/board'));
 app.post('/deletecomments', require('./routes/board'));
+
+app.get('/profile/:id', require('./routes/profile'));
+app.get('/search_data', require('./routes/search'));
+app.get('/search_users', require('./routes/search'));
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');

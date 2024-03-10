@@ -3,12 +3,12 @@ const route = require('color-convert/route');
 const bcypt = require('bcrypt');
 
 module.exports = {
-	loginView : (req, res) => {
+	loginView: (req, res) => {
 		res.render('login', {
 			title: 'Login',
 		});
 	},
-	loginStage : (req, res) => {
+	loginStage: (req, res) => {
 		const inputData = {
 			username: req.body.username,
 			password: req.body.password,
@@ -45,7 +45,7 @@ module.exports = {
 				req.flash('error', 'Invalid password');
 				return res.render('login', { messages: req.flash('error') });
 			});
-			
+
 		});
 	}
 };
