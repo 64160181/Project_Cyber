@@ -490,3 +490,32 @@ nav .profile-details i {
 ul {
     list-style-type: none;
 }
+
+.search-input {
+    width: 80%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    color: #000000;
+    font-size: 16px;
+    outline: none;
+
+    /* เพิ่มสีสัน /
+    transition: background-color 0.3s ease-in-out;
+
+    / เพิ่ม Animations /
+    &::placeholder {
+      color: #aaaaaa;
+    }
+
+    &:focus {
+      background-color: #cfe2ff;
+    }
+  }
+
+  .search-input:focus-within {
+    / เพิ่ม Shadows */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }

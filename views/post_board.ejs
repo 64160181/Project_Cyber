@@ -47,6 +47,12 @@
             <span class="links_name"></c> โปรไฟล์</span>
           </a>
       </li>
+      <li>
+        <a href="/all_member">
+          <i class="bi bi-people-fill"></i>
+          <span class="links_name"></c> สมาชิก</span>
+        </a>
+    </li>
       <% if (user && user.isAdmin == 'Y') { %>
       <li>
         <a href="/adminBKB">
@@ -65,43 +71,17 @@
       <% } %>
     </ul>
   </div>
-
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Board</span>
       </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search'></i>
-      </div>
-      <div class="profile-details">
-        <% if (user) { %>
-          <img src="../images/<%= user.profile_picture %>" alt="">
-          <span class="admin_name">
-            <%= user.username %>
-          </span>
-          <!-- <a href="/logout">ออกจากระบบ</a> -->
-          <% } else { %>
-            <!-- <span>Guest</span> -->
-            <a href="/login">เข้าสู่ระบบ</a>
-            &emsp;
-            <a href="/signup">สมัครสมาชิก</a>
-            <% } %>
-      </div>
-    </nav>
-
-  <section class="home-section">
-    <nav>
-      <div class="sidebar-button">
-        <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Board</span>
-      </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search'></i>
-      </div>
+      <form method="get" class="search-box">
+        <input type="text" name="search" id="autocomplete_search" class="bi bi-search" placeholder="พิมพ์หัวข้อที่ต้องการค้นหา">
+        <button id="search_result">
+        </button>
+      </form>
       <div class="profile-details">
         <% if (user) { %>
           <img src="../images/<%= user.profile_picture %>" alt="">
@@ -161,6 +141,7 @@
         sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
     }
   </script>
+  <script src="../js/search.js"></script>
 </body>
 
 </html>

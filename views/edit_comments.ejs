@@ -26,34 +26,40 @@
         <ul class="nav-links">
             <li>
                 <a href="/">
-                    <i class="bi bi-house"></i>
-                    <span class="links_name"></c> Home</span>
+                  <i class="bi bi-house"></i>
+                  <span class="links_name"></c> หน้าหลัก</span>
                 </a>
-            </li>
-            <li>
-                <a href="/post_board" class="active">
-                    <i class="bi bi-pencil-square"></i>
-                    <span class="links_name"></c> Create Post</span>
+              </li>
+              <li>
+                <a href="/post_board">
+                  <i class="bi bi-pencil-square"></i>
+                  <span class="links_name"></c> สร้างกระทู้</span>
                 </a>
-            </li>
-            <li>
+              </li>
+              <li>
                 <a href="/my_board">
-                    <i class="bi bi-archive"></i>
-                    <span class="links_name"></c> My Posts</span>
+                  <i class="bi bi-archive"></i>
+                  <span class="links_name"></c> กระทู้ของฉัน</span>
                 </a>
                 <li>
-                    <a href="/profile">
-                        <i class="bi bi-person-circle"></i>
-                        <span class="links_name"></c> Profile</span>
-                    </a>
-            </li>
-            <% if (user && user.isAdmin == 'Y') { %>
-            <li>
-                <a href="/adminBKB">
-                    <i class="bi bi-info-circle"></i>
-                    <span class="links_name"></c> Dashboard</span>
+                  <a href="/profile">
+                    <i class="bi bi-person-circle"></i>
+                    <span class="links_name"></c> โปรไฟล์</span>
+                  </a>
+              </li>
+              <li>
+                <a href="/all_member">
+                  <i class="bi bi-people-fill"></i>
+                  <span class="links_name"></c> สมาชิก</span>
                 </a>
             </li>
+              <% if (user && user.isAdmin == 'Y') { %>
+              <li>
+                <a href="/adminBKB" class="active">
+                  <i class="bi bi-info-circle"></i>
+                  <span class="links_name"></c> Dashboard</span>
+                </a>
+              </li>
             <% } %>
             <% if (user) { %>
             <li class="log_out">
@@ -72,10 +78,11 @@
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Board</span>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search'></i>
-            </div>
+            <form method="get" class="search-box">
+                <input type="text" name="search" id="autocomplete_search" class="bi bi-search" placeholder="พิมพ์หัวข้อที่ต้องการค้นหา">
+                <button id="search_result">
+                </button>
+              </form>
             <div class="profile-details">
                 <% if (user) { %>
                     <img src="../images/<%= user.profile_picture %>" alt="">
@@ -139,6 +146,7 @@
                 sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
         }
     </script>
+    <script src="../js/search.js"></script>
 </body>
 
 </html>
