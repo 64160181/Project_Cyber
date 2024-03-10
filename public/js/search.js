@@ -32,7 +32,7 @@ function load_data(query = '') {
             const escapedUsername = escapeHtml(user.username);
             const safeUsername = escapedUsername.replace(new RegExp('(' + query + ')', 'gi'),
               (match) => `<span class="text-primary">${match}</span>`);
-              html += `<a href="/profile/${user.uid}" class="list-group-item user-profile-link" data-user-id="${user.id}" onclick="get_text(this); setSearchValue(this.textContent)">${safeUsername}</a><br>`;
+              html += `<a href="/profile/${user.uid}" class="list-group-item user-profile-link" data-user-id="${user.uid}" onclick="get_text(this); setSearchValue(this.textContent)">${safeUsername}</a><br>`;
           });
         }
 

@@ -5,6 +5,7 @@ const { route } = require('./index.js');
 
 // Define your routes here
 router.get('/profile', profileController.profileView);
+router.get('/profile/:id', profileController.viewUserProfile);
 router.get('/editProfile', profileController.editProfileView);
 router.post('/update_profile', profileController.updateprofilepicture);
 
