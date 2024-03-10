@@ -1,3 +1,4 @@
+const admin = require('../models/admin');
 const adminModel = require('../models/admin');
 const usermodel = require('../models/user');
 
@@ -108,16 +109,51 @@ module.exports = {
         const inputData = {
             uid: req.body.uid,
         };
-        adminModel.deleteUser(inputData, (error, result) => {
+        adminModel.disable_foreign_key((error, result) => {
             if (error) {
-                console.error('Error deleting user:', error);
+                console.error('Error disabling foreign key:', error);
                 return res.status(500).json({
                     message: 'Internal Server Error',
                 });
             }
             if (result) {
-                return res.redirect('/adminBKB');
-            }
-        });
-    },
+                adminModel.deleteUser(inputData, (error, result) => {
+                    if (error) {
+                        console.error('Error deleting user:', error);
+                        return res.status(500).json({
+                            message: 'Internal Server Error',
+                        });
+                    }
+                    if (result) {
+                        adminModel.enable_foreign_key((error, result) => {
+                            if (error) {
+                                console.error('Error enabling foreign key:', error);
+                                return res.status(500).json({
+                                    message: 'Internal Server Error',
+                                });
+                            }
+                            if (result) {
+                                return res.redirect('/adminBKB');
+                            }
+                        });
+                    }
+                });
+            } 
+        }
+        );
+    }
 };
+
+//         adminModel.deleteUser(inputData, (error, result) => {
+//             if (error) {
+//                 console.error('Error deleting user:', error);
+//                 return res.status(500).json({
+//                     message: 'Internal Server Error',
+//                 });
+//             }
+//             if (result) {
+//                 return res.redirect('/adminBKB');
+//             }
+//         });
+//     },
+// };

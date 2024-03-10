@@ -221,14 +221,14 @@
           <div class="comment-title">ความคิดเห็น</div>
           <section class="board">
             <section class="comment-section">
-              <% comments.forEach(function(comment) { %>
+              <% for (const comment of comments) { %>
                 <ul class="comments">
                   <li class="comment">
-                    <img src="../images/chef.png" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <img src="../images/<%= comment.profile_picture %> " alt="รูปโปรไฟล์ผู้ใช้งาน">
                     <div class="comment-content">
 
                       <span class="username">
-                        username
+                        <%= comment.username %>
                       </span>
 
                       <span class="comment-date">
@@ -255,8 +255,9 @@
                         <button class="remove-button" type="submit" formaction="/deletecomments">ลบ</button>
                       </form>
                     <% } %>
+                  </li>
                 </ul>
-                <% }) %>
+                <% } %>
             </section>
           </section>
         </div>

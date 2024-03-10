@@ -144,14 +144,16 @@ module.exports = {
     updateprofilepicture: function(inputData, callback) {
         const { uid,profile_picture } = inputData;
         const query = `UPDATE users SET profile_picture = '${profile_picture}' WHERE uid = '${uid}'`;
-      
+        
         connection.query(query, (error, results) => {
-          if (error) {
-            console.error('Error updating profile picture:', error);
+        if (error) {
+            console.error('Error updating user:', error);
             return callback(error, null);
-          }
-          
-          return callback(null, "Profile picture updated successfully");
-        });
-      },
+        }
+
+        if (results.affectedRows > 0) {
+            return callback(null, inputData);
+        }
+    });
+}
 };

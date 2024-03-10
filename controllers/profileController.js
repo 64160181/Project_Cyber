@@ -1,3 +1,4 @@
+const { log } = require('async');
 const usermodel = require('../models/user');
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -8,10 +9,16 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + '-' + file.originalname);
     }
 });
+
 var upload = multer({ storage: storage });
 module.exports = {
     profileView: function (req, res) {
-        res.render('profile', { title: 'Profile', user: req.session.user });
+        if (!req.session.user) {
+            // Redirect to login page if user is not logged in
+            return res.redirect('/login');
+        } else {
+            res.render('profile', { title: 'Profile', user: req.session.user });
+        }
     },
     editProfileView: function (req, res) {
         res.render('edit_profile', { title: 'Edit Profile', user: req.session.user });
@@ -22,6 +29,8 @@ module.exports = {
             display_name: req.body.display_name,
             username: req.body.username,
             email: req.body.email,
+            profile_picture: req.body.profile_picture,
+
         };
         usermodel.validateUsernameUpdate(inputData, (error, result) => {
             if (error) {
@@ -96,11 +105,15 @@ module.exports = {
                     message: 'Internal Server Error',
                 });
             }
-            console.log(req.body);
+ 
             const inputData = {
                 uid: req.body.uid,
                 profile_picture: req.file ? req.file.filename : null,
+                username: req.body.username,
+                email: req.body.email,
+                display_name: req.body.display_name,
             };
+
             usermodel.updateprofilepicture(inputData, (error, result) => {
                 if (error) {
                     console.error('Error updating profile picture:', error);

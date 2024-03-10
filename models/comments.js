@@ -1,3 +1,4 @@
+const { reset } = require('nodemon');
 const connection = require('./ConMysql');
 
 module.exports = {
@@ -26,13 +27,14 @@ module.exports = {
     });
   },
   deletecomments: (id, Posts_id, Posts_Users_uid, Users_uid, callback) => {
-    const query = `DELETE FROM comments WHERE id = '${id}' AND Posts_id = '${Posts_id}' AND Posts_Users_uid = '${Posts_Users_uid}' AND Users_uid = '${Users_uid}'`;
+    // const query = `DELETE FROM comments WHERE id = '${id}' AND Posts_id = '${Posts_id}' AND Posts_Users_uid = '${Posts_Users_uid}' AND Users_uid = '${Users_uid}'`;
+    const query = `DELETE FROM comments WHERE id = '${id}'`;
     connection.query(query, (error, results) => {
       if (error) {
         console.error('Error deleting comments:', error);
         return callback(error, null);
       }
-
+      console.log('Deleted comments successfully',results);
       return callback(null, results);
     });
   },

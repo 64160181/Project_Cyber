@@ -97,7 +97,11 @@
                       <div class="mt-2">
                         <form action="/update_profile" method="post" enctype="multipart/form-data">
                           <input type="file" name="profile_picture" id="file" accept="image/*"/>
-                          <input type="hidden" name="uid" value="<%= user.uid %>"><br>
+                          <input type="hidden" name="uid" value="<%= user.uid %>">
+                          <input type="hidden" name="username" value="<%= user.username %>">
+                          <input type="hidden" name="email" value="<%= user.email %>">
+                          <input type="hidden" name="display_name" value="<%= user.display_name %>">
+                          <br>
                           <button type="submit" class="btn btn-primary edit-profile">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
                             <path
@@ -145,6 +149,8 @@
                                   <div class="col">
                                     <div class="form-group">
                                       <br>
+                                      <input type="hidden" name="uid" value="<%= user.uid %>">
+                                      <input type="hidden" name="profile_picture" value="<%= user.profile_picture %>">
                                       <button button class="btn btn-primary edit-profile"
                                         type="submit">Save Changes</button>
                                     </div>

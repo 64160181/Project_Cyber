@@ -23,7 +23,7 @@ router.get('/show_post/:id', (req, res) => {
             console.error('Error fetching posts: ', error);
             res.status(500).send('Internal Server Error');
         } else {
-            connection.query('SELECT * FROM comments WHERE posts_id = ?', [req.params.id], (error, commentsresults) => {
+            connection.query('SELECT comments.*, users.username, users.profile_picture FROM comments JOIN users ON comments.Users_uid = users.uid WHERE Posts_id = ?', [req.params.id], (error, commentsresults) => { 
                 if (error) {
                     console.error('Error fetching comments:', error);
                     res.status(500).send('Internal Server Error');
