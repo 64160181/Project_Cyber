@@ -13,6 +13,7 @@ router.get('/profile/:id', (req, res) => {
         } else {
             res.render('searchprofile', {
                 user: results[0],
+                session: req.session.user
             });
         }
     });

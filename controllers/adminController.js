@@ -1,6 +1,6 @@
-const admin = require('../models/admin');
 const adminModel = require('../models/admin');
 const usermodel = require('../models/user');
+const connection = require('../models/ConMysql');
 
 
 module.exports = {
@@ -10,6 +10,13 @@ module.exports = {
             return;
         }
         adminModel.showUser(req, res);
+    },
+    adminBoard: function(req, res) {
+        if (!req.session.user || req.session.user.isAdmin !== 'Y') {
+            res.redirect('/');
+            return;
+        }
+        adminModel.showBoard(req, res);
     },
     viewUserProfile : function(req, res) {
         if (!req.session.user || req.session.user.isAdmin !== 'Y') {
@@ -141,19 +148,43 @@ module.exports = {
             } 
         }
         );
+    },
+    deleteboard: (req, res) => {
+        console.log('req',req.body);
+        const inputData = {
+            post_id: req.body.post_id,
+            User_uid: req.body.Users_uid,
+        };
+        adminModel.disable_foreign_key((error, result) => {
+            if (error) {
+                console.error('Error disabling foreign key:', error);
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
+            if (result) {
+                adminModel.deleteboard(inputData, (error, result) => {
+                    if (error) {
+                        console.error('Error deleting post:', error);
+                        return res.status(500).json({
+                            message: 'Internal Server Error',
+                        });
+                    }
+                    if (result) {
+                        adminModel.enable_foreign_key((error, result) => {
+                            if (error) {
+                                console.error('Error enabling foreign key:', error);
+                                return res.status(500).json({
+                                    message: 'Internal Server Error',
+                                });
+                            }
+                            if (result) {
+                                return res.redirect('/admin_board');
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 };
-
-//         adminModel.deleteUser(inputData, (error, result) => {
-//             if (error) {
-//                 console.error('Error deleting user:', error);
-//                 return res.status(500).json({
-//                     message: 'Internal Server Error',
-//                 });
-//             }
-//             if (result) {
-//                 return res.redirect('/adminBKB');
-//             }
-//         });
-//     },
-// };
