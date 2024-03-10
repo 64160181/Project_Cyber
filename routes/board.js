@@ -52,6 +52,7 @@ router.get('/show_post/:id', (req, res) => {
 
 
     router.post('/comments', comment.newcomments);
+    router.post('/editcommentsview', postboardView.editcommentsView);
     router.post('/editcomments', comment.editcomments);
     router.post('/deletecomments', comment.deletecomments);
 

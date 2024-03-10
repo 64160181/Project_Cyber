@@ -86,22 +86,30 @@ module.exports = {
       );
     },
     editcomments: (req, res) => { 
-      const inputData = {
-        id: req.body.id,
-        Posts_id: req.body.Posts_id,
-        Post_Users_uid : req.body.Post_Users_uid,
-        Users_uid : req.session.user.uid,
-        topic: req.body.topic,
-        detail: req.body.detail,
-      };
-      commentsmodel.editcomments(inputData.id, inputData.topic, inputData.detail, (error) => {
-        if (error) {
-          console.error('Error editing comments:', error);
-          return res.status(500).json({
-            message: 'Internal Server Error',
-          });
+      upload.single('comment_pic')(req, res, (err) => {
+        console.log('req.body', req.body);
+        const inputData = {
+          topic: req.body.topic,
+          detail: req.body.detail,
+          comment_pic: req.file ? req.file.filename : null,
+          id: req.body.id,
+          Posts_id: req.body.Posts_id,
+          Post_Users_uid: req.body.Post_Users_uid,
+          Users_uid: req.session.user.uid
+        };
+        commentsmodel.editcomments(inputData.topic, inputData.detail, inputData.comment_pic, inputData.id, inputData.Posts_id, inputData.Post_Users_uid, inputData.Users_uid, (error,result) => {
+          if (error) {
+            console.error('Error updating comments:', error);
+            return res.status(500).json({
+              message: 'Internal Server Error',
+            });
+          }
+          if (result) {
+            res.redirect(`/show_post/${inputData.Posts_id}`);
+          }
         }
-        res.redirect(`/show_post/${inputData.Posts_id}`);
-      });
-    }
-}
+      );
+    },
+    );
+  }
+};

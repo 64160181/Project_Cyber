@@ -21,6 +21,16 @@ module.exports = {
         }
         res.render('post_board', { user: req.session.user });
     },
+    editcommentsView: (req, res) => {
+        connection.query('SELECT * FROM comments WHERE id = ?', [req.body.id], (error, results) => {
+            if (error) {
+                console.error('Error fetching comments: ', error);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.render('edit_comments', { comments: results, user: req.session.user });
+            }
+        });
+    },
     newpost: (req, res) => {
         upload.single('post_pic')(req, res, (err) => {
             if (err) {
@@ -113,5 +123,5 @@ module.exports = {
                 res.render('edit_board', { post: results[0].id, user: req.session.user });
             }
         });
-    }
+    },
 };

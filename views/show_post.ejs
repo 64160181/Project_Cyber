@@ -246,13 +246,12 @@
                     <% } %>
                     
                     <% if (user && user.uid === comment.Users_uid) { %>
-                      <form action="/editcomments" method="post">
+                      <form action="/editcommentsview" method="post">
                         <input type="hidden" name="id" value="<%= comment.id %>">
-                        <input type="hidden" name="Posts_id" value="<%= comment.Posts_id %>">
-                        <input type="hidden" name="Posts_Users_uid" value="<%= comment.Posts_Users_uid %>">
-                        <input type="hidden" name="Users_uid" value="<%= comment.Users_uid %>">
-                        <button class="edit-button" type="submit">แก้ไข</button>
-                        <button class="remove-button" type="submit" formaction="/deletecomments">ลบ</button>
+                        <input type="hidden" name="topic" value="<%= comment.topic %>">
+                        <input type="hidden" name="Posts_id" value="<%= comment.Posts_id %>">                                                                  
+                        <button class="btn btn-primary" type="submit" style="background-color: rgb(51, 197, 255);">Edit</button>
+                        <button class="btn btn-primary" type="submit" formaction="/deletecomments" style="background-color: red;">Delete</button>
                       </form>
                     <% } %>
                   </li>

@@ -26,8 +26,7 @@ module.exports = {
       return callback(null, results);
     });
   },
-  deletecomments: (id, Posts_id, Posts_Users_uid, Users_uid, callback) => {
-    // const query = `DELETE FROM comments WHERE id = '${id}' AND Posts_id = '${Posts_id}' AND Posts_Users_uid = '${Posts_Users_uid}' AND Users_uid = '${Users_uid}'`;
+  deletecomments: (id, callback) => {
     const query = `DELETE FROM comments WHERE id = '${id}'`;
     connection.query(query, (error, results) => {
       if (error) {
@@ -38,8 +37,8 @@ module.exports = {
       return callback(null, results);
     });
   },
-  editcomments: (topic, detail, comment_pic, id, Posts_id, Posts_Users_uid, Users_uid, callback) => {
-    const query = `UPDATE comments SET topic = '${topic}', detail = '${detail}', comment_pic = '${comment_pic}' WHERE id = '${id}' AND Posts_id = '${Posts_id}' AND Posts_Users_uid = '${Posts_Users_uid}' AND Users_uid = '${Users_uid}'`;
+  editcomments: (topic, detail, comment_pic, id, callback) => {
+    const query = `UPDATE comments SET topic = '${topic}', detail = '${detail}', comment_pic = '${comment_pic}' WHERE id = '${id}'`;
     connection.query(query, (error, results) => {
       if (error) {
         console.error('Error updating comments:', error);
@@ -47,5 +46,5 @@ module.exports = {
       }
       return callback(null, results);
     });
-  }
+  },
 }
