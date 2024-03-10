@@ -74,7 +74,7 @@
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
-      <p method="get" class="search-box"> <!-- หยอกๆๆนะ ใช้ method ไม่ได้ -->
+      <p method="get" class="search-box">
         <input type="text" name="search" id="autocomplete_search" class="bi bi-search" placeholder="พิมพ์หัวข้อที่ต้องการค้นหา">
         <button id="search_result">
         </button>
@@ -98,7 +98,7 @@
     <div class="home-content">
       <div class="lish-boxes">
         <div class="recent-lish box">
-          <div class="title">User Management</div>
+          <div class="title"><a href="/adminBKB">User Management</a> <a href="/admin_board">Board Management<a></div>
           <div class="lish-details">
             <div class="header_wrap">
             </div>
@@ -115,6 +115,7 @@
               </thead>
               <tbody>
                 <% for (const user of users) { %>
+                  <% console.log (user) %>
                 <tr>
                   <td><%= user.uid %></td>
                   <td>
@@ -129,6 +130,7 @@
                     <input type="hidden" name="username" value="<%= user.username %>">
                     <input type="hidden" name="email" value="<%= user.email %>" >
                     <input type="hidden" name="display_name" value="<%= user.display_name %>" >
+                    <input type="hidden" name="profile_picture" value="<%= user.profile_picture %>" >
                     <div class="button">
                       <button class="view" type="summit">View</button>&nbsp
                       <button class="edit" type="summit" formaction="/view_edit_user">Edit</button>&nbsp

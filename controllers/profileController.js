@@ -129,5 +129,35 @@ module.exports = {
             });
         });
     },
+    admin_updateprofilepicture: function (req, res) {
+        upload.single('profile_picture')(req, res, (err) => {
+            if (err) {
+                console.error('Error uploading file:', err);
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
+ 
+            const inputData = {
+                uid: req.body.uid,
+                profile_picture: req.file ? req.file.filename : null,
+                username: req.body.username,
+                email: req.body.email,
+                display_name: req.body.display_name,
+            };
+
+            usermodel.updateprofilepicture(inputData, (error, result) => {
+                if (error) {
+                    console.error('Error updating profile picture:', error);
+                    return res.status(500).json({
+                        message: 'Internal Server Error',
+                    });
+                }
+                if (result) {
+                    return res.redirect('/adminBKB');
+                }
+            });
+        });
+    },
 
 }

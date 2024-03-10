@@ -40,10 +40,12 @@ app.get('/my_board', require('./routes/board'));
 app.get('/show_post/:id', require('./routes/board'));
 app.post('/add_new_post', require('./routes/board'));
 app.post('/delete_post', require('./routes/board'));
+app.post('/deleteboard', require('./routes/admin'));
 app.post('/edit_post', require('./routes/board'));
 app.post('/edit_post_view', require('./routes/board'));
 
 app.get('/adminBKB', require('./routes/admin'));
+app.get('/admin_board', require('./routes/admin'));
 app.post('/view_user_profile', require('./routes/admin'));
 app.post('/view_edit_user', require('./routes/admin'));
 app.post('/edit_user', require('./routes/admin'));
@@ -58,6 +60,8 @@ app.post('/deletecomments', require('./routes/board'));
 app.get('/profile/:id', require('./routes/profile'));
 app.get('/search_data', require('./routes/search'));
 app.get('/search_users', require('./routes/search'));
+
+app.post('/admin_updateprofilepicture', require('./routes/profile'));
 
 app.listen(3000, () => {
     console.log('Server has started with port 3000');

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title> WebBoard </title>
+  <link rel="stylesheet" href="../css/myboard_style.css">
+  <!-- CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class="bi bi-globe"></i>
+      <span class="logo_name">Menu</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="/">
+          <i class="bi bi-house"></i>
+          <span class="links_name"></c> หน้าหลัก</span>
+        </a>
+      </li>
+      <li>
+        <a href="/post_board">
+          <i class="bi bi-pencil-square"></i>
+          <span class="links_name"></c> สร้างกระทู้</span>
+        </a>
+      </li>
+      <li>
+        <a href="/my_board">
+          <i class="bi bi-archive"></i>
+          <span class="links_name"></c> กระทู้ของฉัน</span>
+        </a>
+        <li>
+          <a href="/all_member">
+            <i class="bi bi-person-circle"></i>
+            <span class="links_name"></c> โปรไฟล์</span>
+          </a>
+      </li>
+      <li>
+        <a href="/profile">
+          <i class="bi bi-people-fill"></i>
+          <span class="links_name"></c> สมาชิก</span>
+        </a>
+    </li>
+      <% if (user && user.isAdmin == 'Y') { %>
+      <li>
+        <a href="/adminBKB" class="active">
+          <i class="bi bi-info-circle"></i>
+          <span class="links_name"></c> Dashboard</span>
+        </a>
+      </li>
+      <% } %>
+      <% if (user) { %>
+      <li class="log_out">
+        <a href="/logout">
+          <i class='bx bx-log-out'></i>
+          <span class="links_name">Log out</span>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Board</span>
+      </div>
+      <p method="get" class="search-box">
+        <input type="text" name="search" id="autocomplete_search" class="bi bi-search" placeholder="พิมพ์หัวข้อที่ต้องการค้นหา">
+        <button id="search_result">
+        </button>
+    </p>
+      <div class="profile-details">
+        <% if (user) { %>
+          <img src="../images/<%= user.profile_picture %>" alt="">
+          <span class="admin_name">
+            <%= user.username %>
+          </span>
+          <!-- <a href="/logout">ออกจากระบบ</a> -->
+          <% } else { %>
+            <!-- <span>Guest</span> -->
+            <a href="/login">เข้าสู่ระบบ</a>
+            &emsp;
+            <a href="/signup">สมัครสมาชิก</a>
+            <% } %>
+      </div>
+    </nav>
+
+    <div class="home-content">
+      <div class="lish-boxes">
+        <div class="recent-lish box">
+          <div class="title">
+            <h1>Admin Board</h1>
+          </div>
+          <div class="lish-details">
+            <div class="header_wrap">
+            </div>
+            <div class="my-board-date"></div>
+            <ul>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Topic</th>
+                    <th>Action</th>
+                  </tr>
+                  <% for (const post of Posts) { %>
+                    <% if (user.isAdmin == 'Y') { %>
+                      <% console.log(post) %>
+                      <tbody>
+                        <td>
+                          <p><%= post.topic %></p>
+                        </td>
+                        <td>
+                          <form action="/edit_post_view" method="post">
+                            <input type="hidden" name="post_id" value="<%= post.id %>">
+                            <input type="hidden" name="Users_uid" value="<%= post.Users_uid %>">
+                            <div>
+                              <button class="edit-button" type="submit">Edit</button>
+                              <button class="remove-button" type="submit" formaction="/deleteboard">Remove</button>
+                            </div>
+                          </form>
+                        </td>
+                      </tbody>
+                    <% } %>
+                  <% } %>
+              </table>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+      } else
+        sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+  </script>
+<script src="../js/search.js"></script>
+</body>
+
+</html>

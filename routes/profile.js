@@ -23,4 +23,6 @@ router.post('/update_profile', profileController.updateprofilepicture);
 router.post('/update_user', profileController.updateuser);
 router.post('/update_password', profileController.updatepassword);
 
+router.post('/admin_updateprofilepicture', profileController.admin_updateprofilepicture);
+
 module.exports = router;
