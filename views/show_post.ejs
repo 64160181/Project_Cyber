@@ -226,7 +226,7 @@
                     </div>
                     <% } %>
                     
-                    <% if (user && user.uid === comment.Users_uid || user.isAdmin=='Y') { %>
+                    <% if (user && (user.uid === comment.Users_uid || user.isAdmin === 'Y')) { %>
                       <form action="/editcommentsview" method="post">
                         <input type="hidden" name="id" value="<%= comment.id %>">
                         <input type="hidden" name="Posts_id" value="<%= comment.Posts_id %>">

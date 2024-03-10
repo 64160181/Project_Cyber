@@ -2,7 +2,7 @@ const connection = require('./ConMysql');
 const bcypt = require('bcrypt');
 module.exports = {
     showUser: function (req, res) {
-        connection.query('SELECT * FROM Users', (error, results) => {
+        connection.query('SELECT * FROM users', (error, results) => {
             if (error) {
                 console.error('Error fetching posts: ', error);
                 res.status(500).send('Internal Server Error');
@@ -93,12 +93,12 @@ module.exports = {
 			// Redirect to login page if user is not logged in
 			return res.redirect('/login');
 		} else {
-			connection.query('SELECT * FROM Users', (error, userResults) => {
+			connection.query('SELECT * FROM users', (error, userResults) => {
 				if (error) {
 					console.error('Error fetching users: ', error);
 					res.status(500).send('Internal Server Error');
 				} else {
-					connection.query('SELECT * FROM Posts', (error, postResults) => {
+					connection.query('SELECT * FROM posts', (error, postResults) => {
 						if (error) {
 							console.error('Error fetching posts: ', error);
 							res.status(500).send('Internal Server Error');
