@@ -44,8 +44,7 @@ module.exports = {
                 console.error('Error deleting post:', error);
                 return callback(error, null);
             } 
-            
             return callback(null, results);
         });
-    }
+    },
 };

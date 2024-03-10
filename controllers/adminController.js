@@ -1,6 +1,7 @@
 const adminModel = require('../models/admin');
 const usermodel = require('../models/user');
 const connection = require('../models/ConMysql');
+const connection = require('../models/ConMysql');
 
 
 module.exports = {
