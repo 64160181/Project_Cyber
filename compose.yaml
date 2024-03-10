@@ -31,7 +31,7 @@ services:
       - db
       
   db:
-    image: mysql:5.7
+    image: mysql
     restart: always
     env_file:
       - ./.env
