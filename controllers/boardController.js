@@ -103,6 +103,7 @@ module.exports = {
                     message: 'Internal Server Error',
                 });
             } if (result) {
+                console.log('inputData', inputData);
                 postmodel.deletePost(inputData.users_uid, inputData.post_id, (error, result) => {
                     if (error) {
                         console.error('Error deleting post:', error);

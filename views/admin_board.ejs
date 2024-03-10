@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="UTF-8">
-  <title> AdminConsole </title>
-  <link rel="stylesheet" href="../css/admin_style.css">
-  <!-- Boxicons CDN Link -->
+  <title> WebBoard </title>
+  <link rel="stylesheet" href="../css/myboard_style.css">
+  <!-- CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -38,24 +37,24 @@
           <span class="links_name"></c> กระทู้ของฉัน</span>
         </a>
         <li>
-          <a href="/profile">
+          <a href="/all_member">
             <i class="bi bi-person-circle"></i>
             <span class="links_name"></c> โปรไฟล์</span>
           </a>
       </li>
       <li>
-        <a href="/all_member">
+        <a href="/profile">
           <i class="bi bi-people-fill"></i>
           <span class="links_name"></c> สมาชิก</span>
         </a>
     </li>
-    <% if (user && user.isAdmin == 'Y') { %>
-    <li>
-      <a href="/adminBKB" class="active">
-        <i class="bi bi-info-circle"></i>
-        <span class="links_name"></c> Dashboard</span>
-      </a>
-    </li>
+      <% if (user && user.isAdmin == 'Y') { %>
+      <li>
+        <a href="/adminBKB" class="active">
+          <i class="bi bi-info-circle"></i>
+          <span class="links_name"></c> Dashboard</span>
+        </a>
+      </li>
       <% } %>
       <% if (user) { %>
       <li class="log_out">
@@ -72,13 +71,13 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Dashboard</span>
+        <span class="dashboard">Board</span>
       </div>
-      <form method="get" class="search-box">
+      <p method="get" class="search-box">
         <input type="text" name="search" id="autocomplete_search" class="bi bi-search" placeholder="พิมพ์หัวข้อที่ต้องการค้นหา">
         <button id="search_result">
         </button>
-      </form>
+    </p>
       <div class="profile-details">
         <% if (user) { %>
           <img src="../images/<%= user.profile_picture %>" alt="">
@@ -98,71 +97,45 @@
     <div class="home-content">
       <div class="lish-boxes">
         <div class="recent-lish box">
-          <div class="title"><a href="/adminBKB">User Management</a> <a href="/admin_board">Board Management<a></div>
+          <div class="title">
+            <h1>Admin Board</h1>
+          </div>
           <div class="lish-details">
             <div class="header_wrap">
             </div>
-            <table class="table table-striped table-class" id="table-id">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Profile</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Password</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for (const user of users) { %>
-                <tr>
-                  <td><%= user.uid %></td>
-                  <td>
-                    <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
-                  </td>
-                  <td> <%= user.username %></td>
-                  <td> <%= user.email %></td>
-                  <td>****</td>
-                  <td>
-                    <form method="post" action="/view_user_profile">
-                    <input type="hidden" name="uid" value="<%= user.uid %>">
-                    <input type="hidden" name="username" value="<%= user.username %>">
-                    <input type="hidden" name="email" value="<%= user.email %>" >
-                    <input type="hidden" name="display_name" value="<%= user.display_name %>" >
-                    <div class="button">
-                      <button class="view" type="summit">View</button>&nbsp
-                      <button class="edit" type="summit" formaction="/view_edit_user">Edit</button>&nbsp
-                      <button class="delete" type="summit" formaction="/delete_user">Delete</button>
-                    </div>
-                  </form>
-                  </td>
-                </tr>
-                <% } %>
-
-
-                <!-- <tr>
-                  <td>2</td>
-                  <td>
-                    <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
-                  </td>
-                  <td>Anna</td>
-                  <td>erat@veum.ca</td>
-                  <td>8180</td>
-                  <td>
-                    <div class="button">
-                      <a class="view" href="#">View</a>&nbsp
-                      <a class="edit" href="#">Edit</a>&nbsp
-                      <a class="delete" href="#">Delete</a>
-                    </div>
-                  </td>
-                </tr> -->
-
-              <tbody>
-            </table>
+            <div class="my-board-date"></div>
+            <ul>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Topic</th>
+                    <th>Action</th>
+                  </tr>
+                  <% for (const post of Posts) { %>
+                    <% if (user.isAdmin == 'Y') { %>
+                      <% console.log(post) %>
+                      <tbody>
+                        <td>
+                          <p><%= post.topic %></p>
+                        </td>
+                        <td>
+                          <form action="/edit_post_view" method="post">
+                            <input type="hidden" name="id" value="<%= post.id %>">
+                            <input type="hidden" name="Users_uid" value="<%= post.Users_uid %>">
+                            <div>
+                              <button class="edit-button" type="submit">Edit</button>
+                              <button class="remove-button" type="submit" formaction="/deleteboard">Remove</button>
+                            </div>
+                          </form>
+                        </td>
+                      </tbody>
+                    <% } %>
+                  <% } %>
+              </table>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
   </section>
 
   <script>
