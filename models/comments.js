@@ -2,8 +2,8 @@ const { reset } = require('nodemon');
 const connection = require('./ConMysql');
 
 module.exports = {
-  // Query to get all commetns
-  getAllcomments: (callback) => {
+  // Query to get all comments
+  getAllComments: (callback) => {
     const query = 'SELECT * FROM comments';
     connection.query(query, (error, results) => {
       if (error) {
@@ -14,12 +14,13 @@ module.exports = {
       return callback(null, results);
     });
   },
-  // Query to add a new comments
+  // Query to add a new comment
   newcomments: (topic, detail, comment_pic, Posts_id, Posts_Users_uid, Users_uid, callback) => {
-    const query = `INSERT INTO comments (topic, detail, comment_pic, Posts_id, Posts_Users_uid, Users_uid) VALUES ('${topic}', '${detail}', '${comment_pic}', '${Posts_id}', '${Posts_Users_uid}', '${Users_uid}')`;
-    connection.query(query, (error, results) => {
+    const query = 'INSERT INTO comments (topic, detail, comment_pic, Posts_id, Posts_Users_uid, Users_uid) VALUES (?, ?, ?, ?, ?, ?)';
+    const values = [topic, detail, comment_pic, Posts_id, Posts_Users_uid, Users_uid];
+    connection.query(query, values, (error, results) => {
       if (error) {
-        console.error('Error creating comments:', error);
+        console.error('Error creating comment:', error);
         return callback(error, null);
       }
 
@@ -27,26 +28,26 @@ module.exports = {
     });
   },
   deletecomments: (id, Posts_id, Posts_Users_uid, Users_uid, callback) => {
-    // const query = `DELETE FROM comments WHERE id = '${id}' AND Posts_id = '${Posts_id}' AND Posts_Users_uid = '${Posts_Users_uid}' AND Users_uid = '${Users_uid}'`;
-    const query = `DELETE FROM comments WHERE id = '${id}'`;
-    connection.query(query, (error, results) => {
+    const query = 'DELETE FROM comments WHERE id = ?';
+    const values = [id];
+    connection.query(query, values, (error, results) => {
       if (error) {
-        console.error('Error deleting comments:', error);
+        console.error('Error deleting comment:', error);
         return callback(error, null);
       }
-      console.log('Deleted comments successfully', results);
+      console.log('Deleted comment successfully', results);
       return callback(null, results);
     });
   },
   editcomments: (topic, detail, comment_pic, id, Posts_id, Posts_Users_uid, Users_uid, callback) => {
-    const query = `UPDATE comments SET topic = '${topic}', detail = '${detail}', comment_pic = '${comment_pic}' WHERE id = '${id}'`;
-    connection.query(query, (error, results) => {
+    const query = 'UPDATE comments SET topic = ?, detail = ?, comment_pic = ? WHERE id = ?';
+    const values = [topic, detail, comment_pic, id];
+    connection.query(query, values, (error, results) => {
       if (error) {
-        console.error('Error updating comments:', error);
+        console.error('Error updating comment:', error);
         return callback(error, null);
       }
       return callback(null, results);
-    }
-    );
+    });
   }
 };
