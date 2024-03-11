@@ -113,8 +113,10 @@
                     <div class="user-info">
                       <div class="user-info">
                         <% showPosts.forEach(function(showpost) { %>
-                          <% if (profilepic) { %>
-                            <img src="../images/<%= profilepic %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                            <% if (profilepic) { %>
+                              <img src="../images/<%= profilepic %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                            <% } else { %>
+                              <img src="../images/chef.png" alt="รูปโปรไฟล์ผู้ใช้งาน">
                             <% } %>
 
                               <span class="username">
