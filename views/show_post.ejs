@@ -84,7 +84,11 @@
         </p>
         <div class="profile-details">
           <% if (user) { %>
-            <img src="../images/<%= user.profile_picture %>" alt="">
+            <% if (user.profile_picture) { %>
+              <img src="../images/<%= user.profile_picture %>" alt="">
+            <% } else { %>
+              <img src="../images/chef.png" alt="">
+            <% } %>
             <span class="admin_name">
               <%= user.username %>
             </span>
@@ -109,8 +113,10 @@
                     <div class="user-info">
                       <div class="user-info">
                         <% showPosts.forEach(function(showpost) { %>
-                          <% if (profilepic) { %>
-                            <img src="../images/<%= profilepic %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                            <% if (profilepic) { %>
+                              <img src="../images/<%= profilepic %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                            <% } else { %>
+                              <img src="../images/chef.png" alt="รูปโปรไฟล์ผู้ใช้งาน">
                             <% } %>
 
                               <span class="username">
@@ -174,7 +180,7 @@
                           <textarea name="topic" id="topic" rows="5"
                             placeholder="เขียนความคิดเห็นของคุณ..."></textarea><br>
                           <label for="comment_pic">รูปภาพ:</label><br>
-                          <input type="file" id="comment_pic" name="comment_pic" accept="image/*">
+                          <input type="file" id="comment_pic" name="comment_pic" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg">
                           <input type="hidden" name="detail" value="null">
                           <input type="hidden" name="Posts_id" value="<%= showpost.id %>">
                           <input type="hidden" name="Posts_Users_uid" value="<%= showpost.Users_uid %>">
@@ -205,7 +211,11 @@
               <% for (const comment of comments) { %>
                 <ul class="comments">
                   <li class="comment">
-                    <img src="../images/<%= comment.profile_picture %> " alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <% if (comment.profile_picture && comment.profile_picture !== "null") { %>
+                      <img src="../images/<%= comment.profile_picture %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <% } else { %>
+                      <img src="../images/chef.png" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <% } %>
                     <div class="comment-content">
 
                       <span class="username">

@@ -8,7 +8,6 @@ FROM node:${NODE_VERSION}-alpine
 ENV NODE_ENV production
 
 # Create a new directory and set its permissions to be accessible by the node group.
-RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
 
 # Switch to the newly created directory.
 WORKDIR /usr/src/app
@@ -23,7 +22,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm ci --omit=dev
 
 # Run the application as a non-root user. This is a best practice for security.
-USER node
+USER root
 
 # Copy the rest of the source files into the image.
 COPY . .

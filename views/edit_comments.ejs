@@ -85,7 +85,12 @@
             </p>
             <div class="profile-details">
                 <% if (user) { %>
-                    <img src="../images/<%= user.profile_picture %>" alt="">
+                    <% if (user.profile_picture) { %>
+                        <img src="../images/<%= user.profile_picture %>" alt="">
+                    <% } else { %>
+                        <img src="../images/chef.png" alt="">
+                    <% } %>
+                <% } %>
                     <span class="admin_name">
                         <%= user.username %>
                     </span>
@@ -116,7 +121,7 @@
                                         <input type="hidden" name="posts_id" value="<%= comment.Posts_id %>">
                                         <br>
                                         <label for="comment-image">Image:</label>
-                                        <input type="file"name="comment_pic" accept="image/*">
+                                        <input type="file" name="comment_pic" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg">
                                         <input type="hidden" name="Posts_Users_uid" value="<%= comment.Posts_Users_uid %>">
                                         <span>
                                             <button class="post-button" type="submit">Edit</button>

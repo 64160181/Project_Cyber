@@ -80,7 +80,11 @@
       </p>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/<%= user.profile_picture %>" alt="">
+          <% if (user.profile_picture) { %>
+            <img src="../images/<%= user.profile_picture %>" alt="">
+          <% } else { %>
+            <img src="../images/chef.png" alt="">
+          <% } %>
           <span class="admin_name">
             <%= user.username %>
           </span>

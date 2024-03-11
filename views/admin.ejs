@@ -81,7 +81,11 @@
       </p>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/<%= user.profile_picture %>" alt="">
+          <% if (user.profile_picture) { %>
+            <img src="../images/<%= user.profile_picture %>" alt="">
+          <% } else { %>
+            <img src="../images/chef.png" alt="">
+          <% } %>
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -119,7 +123,11 @@
                 <tr>
                   <td><%= user.uid %></td>
                   <td>
-                    <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
+                    <% if (user.profile_picture) { %>
+                      <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
+                    <% } else { %>
+                      <img src="../images/chef.png" alt="ผู้ใช้งาน">
+                    <% } %>
                   </td>
                   <td> <%= user.username %></td>
                   <td> <%= user.email %></td>
@@ -140,25 +148,6 @@
                   </td>
                 </tr>
                 <% } %>
-
-
-                <!-- <tr>
-                  <td>2</td>
-                  <td>
-                    <img src="../images/<%= user.profile_picture %>" alt="ผู้ใช้งาน">
-                  </td>
-                  <td>Anna</td>
-                  <td>erat@veum.ca</td>
-                  <td>8180</td>
-                  <td>
-                    <div class="button">
-                      <a class="view" href="#">View</a>&nbsp
-                      <a class="edit" href="#">Edit</a>&nbsp
-                      <a class="delete" href="#">Delete</a>
-                    </div>
-                  </td>
-                </tr> -->
-
               <tbody>
             </table>
           </div>
