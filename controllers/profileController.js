@@ -1,7 +1,6 @@
 const { log } = require('async');
 const usermodel = require('../models/user');
 const multer = require('multer');
-const path = require('path');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/images/');
@@ -11,18 +10,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-      const filetypes = /jpeg|jpg|png|gif|bmp|tiff|tif|webp|svg/;
-      const mimetype = filetypes.test(file.mimetype);
-      const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-      if (mimetype && extname) {
-        return cb(null, true);
-      }
-      cb('Error: File upload only supports the following filetypes - ' + filetypes);
-    }
-  });
+var upload = multer({ storage: storage });
 module.exports = {
     profileView: function (req, res) {
         if (!req.session.user) {
@@ -114,8 +102,10 @@ module.exports = {
         upload.single('profile_picture')(req, res, (err) => {
             if (err) {
                 console.error('Error uploading file:', err);
-                return res.redirect('/');
-              }
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
  
             const inputData = {
                 uid: req.body.uid,
@@ -143,8 +133,10 @@ module.exports = {
         upload.single('profile_picture')(req, res, (err) => {
             if (err) {
                 console.error('Error uploading file:', err);
-                return res.redirect('/');
-              }
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
  
             const inputData = {
                 uid: req.body.uid,

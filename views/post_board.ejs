@@ -84,11 +84,7 @@
       </p>
       <div class="profile-details">
         <% if (user) { %>
-          <% if (user.profile_picture) { %>
-            <img src="../images/<%= user.profile_picture %>" alt="">
-          <% } else { %>
-            <img src="../images/chef.png" alt="">
-          <% } %>
+          <img src="../images/<%= user.profile_picture %>" alt="">
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -119,7 +115,7 @@
                     <textarea id="details" name="details" style="font-size: 15px;" placeholder="เนื้อหากระทู้"required></textarea>
                     <br>
                     <label for="post-image">รูปภาพ:</label>
-                    <input type="file" name="post_pic" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg">
+                    <input type="file"name="post_pic" accept="image/*">
                     <span>
                       <button class="post-button" type="submit">โพสต์</button>
                       <button class="cancel-button" type="submit" formmethod="get" formaction="/">ยกเลิก</button>

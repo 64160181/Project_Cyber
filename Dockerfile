@@ -1,9 +1,5 @@
 # syntax=docker/dockerfile:1
 
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
-
 ARG NODE_VERSION=18.17.0
 
 FROM node:${NODE_VERSION}-alpine
@@ -11,7 +7,10 @@ FROM node:${NODE_VERSION}-alpine
 # Use production node environment by default.
 ENV NODE_ENV production
 
+# Create a new directory and set its permissions to be accessible by the node group.
+RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
 
+# Switch to the newly created directory.
 WORKDIR /usr/src/app
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
@@ -24,7 +23,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm ci --omit=dev
 
 # Run the application as a non-root user. This is a best practice for security.
-USER root
+USER node
 
 # Copy the rest of the source files into the image.
 COPY . .

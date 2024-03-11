@@ -81,11 +81,7 @@
     </p>
       <div class="profile-details">
         <% if (session) { %>
-          <% if (session.profile_picture) { %>
-            <img src="../images/<%= session.profile_picture %>" alt="">
-          <% } else { %>
-            <img src="../images/chef.png" alt="">
-          <% } %>
+          <img src="../images/<%= session.profile_picture %>" alt="">
           <span class="admin_name">
             <%= session.username %>
           </span>
@@ -124,11 +120,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="about-avatar">
-                    <% if (user.profile_picture) { %>
-                      <img src="../images/<%= user.profile_picture %>" title="" alt="">
-                    <% } else { %>
-                      <img src="../images/chef.png" title="" alt="">
-                    <% } %>
+                    <img src="../images/<%= user.profile_picture %>" title="" alt="">
                   </div>
                 </div>
               </div>

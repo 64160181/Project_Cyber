@@ -1,7 +1,7 @@
 const postmodel = require('../models/post');
 const connection = require('../models/ConMysql.js');
 const adminmodel = require('../models/admin');
-const path = require('path');
+
 const multer = require('multer');
 const session = require('express-session');
 const admin = require('../models/admin');
@@ -13,18 +13,7 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + '-' + file.originalname);
     }
 });
-const upload = multer({
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-        const filetypes = /jpeg|jpg|png|gif|bmp|tiff|tif|webp|svg/;
-        const mimetype = filetypes.test(file.mimetype);
-        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        if (mimetype && extname) {
-            return cb(null, true);
-        }
-        cb('Error: File upload only supports the following filetypes - ' + filetypes);
-    }
-});
+const upload = multer({ storage: storage });
 
 module.exports = {
     postboardView: (req, res) => {
@@ -38,8 +27,10 @@ module.exports = {
         upload.single('post_pic')(req, res, (err) => {
             if (err) {
                 console.error('Error uploading file:', err);
-                return res.redirect('/');
-              }
+                return res.status(500).json({
+                    message: 'Internal Server Error',
+                });
+            }
             console.log(req.body);
             const inputData = {
                 topic: req.body.topic,

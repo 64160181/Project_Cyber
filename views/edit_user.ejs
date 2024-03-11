@@ -80,11 +80,7 @@
           </p>
           <div class="profile-details">
             <% if (session) { %>
-              <% if (user.profile_picture) { %>
-                <img src="../images/<%= user.profile_picture %>" alt="">
-              <% } else { %>
-                <img src="../images/chef.png" alt="">
-              <% } %>
+              <img src="../images/<%= user.profile_picture %>" alt="">
               <span class="admin_name">
                 <%= session.username %>
               </span>
@@ -106,11 +102,7 @@
               <!-- <% console.log(user) %> -->
               <div class="col-12 col-sm-auto mb-3">
                 <div class="mx-auto" style="width: 160px;">
-                  <% if (user.profile_picture) { %>
-                    <img src="../images/<%= user.profile_picture %>" width="150" height="150" class="rounded-circle" alt="">
-                  <% } else { %>
-                    <img src="../images/chef.png" width="150" height="150" class="rounded-circle" alt="">
-                  <% } %>
+                  <img src="../images/<%= user.profile_picture %>" width="150" height="150" class="rounded-circle" alt="">
                   <br>
                 </div>
               </div>
@@ -123,7 +115,7 @@
                     <div class="tab-pane active">
                       <div class="mt-2">
                         <form action="/admin_updateprofilepicture" method="post" enctype="multipart/form-data">
-                          <input type="file" name="profile_picture" id="file" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg" />
+                          <input type="file" name="profile_picture" id="file" accept="image/*" />
                           <input type="hidden" name="uid" value="<%= user.uid %>">
                           <input type="hidden" name="username" value="<%= user.username %>">
                           <input type="hidden" name="email" value="<%= user.email %>">

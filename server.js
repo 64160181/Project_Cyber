@@ -6,6 +6,7 @@ const path = require('path');
 const ejs = require('ejs');
 const flash = require('express-flash');
 const session = require('express-session');
+const helmet = require('helmet');
 
 app.use(session({
     secret: 'keyboard',
@@ -14,6 +15,34 @@ app.use(session({
     cookie: { maxAge: 60*60*1000 }
 }));
 app.use(flash());
+
+app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:"],
+        connectSrc: ["'self'"],
+        fontSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        mediaSrc: ["'self'"],
+        frameSrc: ["'self'"]
+    }
+}));
+app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+app.use(helmet.hsts({
+    maxAge: 86400,
+    includeSubDomains: true,
+}));
+app.use(
+    helmet({
+      noSniff: true,
+    })
+);
+app.use(helmet.xssFilter());
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
