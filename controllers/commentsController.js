@@ -1,6 +1,7 @@
 const commentsmodel = require('../models/comments.js');
 const adminModel = require('../models/admin');
 const multer = require('multer');
+const path = require('path');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/images/');
@@ -9,9 +10,21 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + '-' + file.originalname);
   }
 });
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    const filetypes = /jpeg|jpg|png|gif|bmp|tiff|tif|webp|svg/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb('Error: File upload only supports the following filetypes - ' + filetypes);
+  }
+});
 const connection = require('../models/ConMysql.js');
 const admin = require('../models/admin');
+const { redirect } = require('statuses');
 module.exports = {
   showpostView: (req, res) => {
     res.render('show_post', { user: req.session.user });
@@ -20,9 +33,7 @@ module.exports = {
     upload.single('comment_pic')(req, res, (err) => {
       if (err) {
         console.error('Error uploading file:', err);
-        return res.status(500).json({
-          message: 'Internal Server Error',
-        });
+        return res.redirect('/');
       }
       console.log(req.body);
       const inputData = {
