@@ -123,7 +123,7 @@
                     <div class="tab-pane active">
                       <div class="mt-2">
                         <form action="/admin_updateprofilepicture" method="post" enctype="multipart/form-data">
-                          <input type="file" name="profile_picture" id="file" accept="image/*" />
+                          <input type="file" name="profile_picture" id="file" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg" />
                           <input type="hidden" name="uid" value="<%= user.uid %>">
                           <input type="hidden" name="username" value="<%= user.username %>">
                           <input type="hidden" name="email" value="<%= user.email %>">
