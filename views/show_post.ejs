@@ -84,7 +84,11 @@
         </p>
         <div class="profile-details">
           <% if (user) { %>
-            <img src="../images/<%= user.profile_picture %>" alt="">
+            <% if (user.profile_picture) { %>
+              <img src="../images/<%= user.profile_picture %>" alt="">
+            <% } else { %>
+              <img src="../images/chef.png" alt="">
+            <% } %>
             <span class="admin_name">
               <%= user.username %>
             </span>
@@ -205,7 +209,11 @@
               <% for (const comment of comments) { %>
                 <ul class="comments">
                   <li class="comment">
-                    <img src="../images/<%= comment.profile_picture %> " alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <% if (comment.profile_picture && comment.profile_picture !== "null") { %>
+                      <img src="../images/<%= comment.profile_picture %>" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <% } else { %>
+                      <img src="../images/chef.png" alt="รูปโปรไฟล์ผู้ใช้งาน">
+                    <% } %>
                     <div class="comment-content">
 
                       <span class="username">

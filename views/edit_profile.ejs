@@ -87,7 +87,11 @@
       </p>
       <div class="profile-details">
         <% if (user) { %>
-          <img src="../images/<%= user.profile_picture %>" alt="">
+          <% if (user.profile_picture) { %>
+            <img src="../images/<%= user.profile_picture %>" alt="">
+          <% } else { %>
+            <img src="../images/chef.png" alt="">
+          <% } %>
           <span class="admin_name">
             <%= user.username %>
           </span>
@@ -108,7 +112,11 @@
             <% if (user) { %>
               <div class="col-12 col-sm-auto mb-3">
                 <div class="mx-auto" style="width: 160px;">
-                  <img src="../images/<%= user.profile_picture %>" width="150" height="150" class="rounded-circle"
+                  <% if (user.profile_picture) { %>
+                    <img src="../images/<%= user.profile_picture %>" width="150" height="150" class="rounded-circle" alt="">
+                  <% } else { %>
+                    <img src="../images/chef.png" width="150" height="150" class="rounded-circle" alt="">
+                  <% } %>
                     alt="">
                   <br>
                 </div>
